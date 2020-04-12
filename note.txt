@@ -1,0 +1,4 @@
+to fix sqlite error :
+https://www.aljaiban.com/post/setting-up-electron-with-sqlite-on-windows 
+https://stackoverflow.com/questions/49582728/electronjs-please-install-sqlite3-package-manually/57553843 
+
