@@ -1,0 +1,25 @@
+.houssem:focus-within {
+ background-color: rgba(146, 44, 136, 0.1);
+ outline: 1px solid rgba(146, 44, 136, 0.1);
+}
+
+.houssem:hover button:not(:hover), .houssem:focus button:not(:focus) {
+    background-color: #af67a4;
+    border-color: #af67a4;
+    color: #fff;
+}
+
+.houssem:hover a:not(:hover), .houssem:focus a:not(:focus){
+    text-decoration: initial;
+    color: #922c88;
+}
+
+.correct .btn {
+    background-color: green;
+    border-color: green;
+    color: #fff;
+}
+
+.answer {
+    background-color: rgba(212, 23, 23, 0.39);
+}

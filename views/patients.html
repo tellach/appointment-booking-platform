@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="font/iconsmind/style.css" />
+    <link rel="stylesheet" href="font/simple-line-icons/css/simple-line-icons.css" />
+
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/fullcalendar.min.css" />
+    <link rel="stylesheet" href="css/vendor/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="css/vendor/datatables.responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" href="css/vendor/select2.min.css" />
+    <link rel="stylesheet" href="css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="css/vendor/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-stars.css" />
+    <link rel="stylesheet" href="css/vendor/nouislider.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+    <nav class="navbar fixed-top">
+        <div class="d-flex align-items-center navbar-left">
+            <a href="#" class="menu-button d-none d-md-block">
+                <svg class="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 17">
+                    <rect x="0.48" y="0.5" width="7" height="1" />
+                    <rect x="0.48" y="7.5" width="7" height="1" />
+                    <rect x="0.48" y="15.5" width="7" height="1" />
+                </svg>
+                <svg class="sub" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17">
+                    <rect x="1.56" y="0.5" width="16" height="1" />
+                    <rect x="1.56" y="7.5" width="16" height="1" />
+                    <rect x="1.56" y="15.5" width="16" height="1" />
+                </svg>
+            </a>
+
+            <a href="#" class="menu-button-mobile d-xs-block d-sm-block d-md-none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
+                    <rect x="0.5" y="0.5" width="25" height="1" />
+                    <rect x="0.5" y="7.5" width="25" height="1" />
+                    <rect x="0.5" y="15.5" width="25" height="1" />
+                </svg>
+            </a>
+
+            <div class="search" data-search-path="Layouts.Search.html?q=">
+                <input placeholder="Search...">
+                <span class="search-icon">
+                    <i class="simple-icon-magnifier"></i>
+                </span>
+            </div>
+        </div>
+
+
+        
+
+        <div class="navbar-right">
+            <div class="header-icons d-inline-block align-middle">
+            
+
+                <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton">
+                    <i class="simple-icon-size-fullscreen"></i>
+                    <i class="simple-icon-size-actual"></i>
+                </button>
+
+            </div>
+
+            <div class="user d-inline-block">
+                <button class="btn btn-empty p-0" type="button"  aria-haspopup="true"
+                    aria-expanded="false">
+                    <span class="name">Sergio Kortney</span>
+                    <span>
+                        <img alt="Profile Picture" src="img/People-Doctor-Male-icon.png" />
+                    </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar">
+        <div class="main-menu">
+            <div class="scroll">
+                <ul class="list-unstyled">
+                    <li>
+                        <a >
+                            <i class="iconsmind-Monitor-Laptop"></i>
+                            <span>Tableau de bord</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a >
+                            <i class="iconsmind-MaleFemale"></i>Patients
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            <i class="iconsmind-Timer-2"></i>Rendez-vous
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            <i class="simple-icon-settings"></i>Configurations
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="container-fluid disable-text-selection">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <h1>Liste des patients</h1>
+                        <div class="float-sm-right text-zero">
+                            <button type="button" class="btn btn-primary btn-lg mr-1">Ajouter un patient</button>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-2">
+                        <a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse" href="#displayOptions"
+                            role="button" aria-expanded="true" aria-controls="displayOptions">
+                            Display Options
+                            <i class="simple-icon-arrow-down align-middle"></i>
+                        </a>
+                        <div class="collapse d-md-block" id="displayOptions">
+                            <div class="d-block d-md-inline-block">
+                                <div class="btn-group float-md-left mr-1 mb-1">
+                                    <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Trier par
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Age</a>
+                                        <a class="dropdown-item" href="#">Dernier rendez-vous</a>
+                                    </div>
+                                </div>
+                                <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+                                    <input placeholder="Recherche...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator mb-5"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 list" data-check-all="checkAll">
+
+                    <div class="card d-flex flex-row mb-3">
+                        <a class="d-flex pt-3 pl-2" href="#">
+                            <img src="img/People-Patient-Male-icon.png" alt="Fat Rascal" class="list-thumbnail responsive border-0" style="height: 50px;" />
+                        </a>
+                        <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                            <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                                <a href="#" class="w-40 w-sm-100">
+                                    <p class="list-item-heading truncate">Adel Namani</p>
+                                </a>
+                                <p class="mb-1 text-muted text-small w-15 w-sm-100">Homme</p>
+                                <p class="mb-1 text-muted text-small w-15 w-sm-100">11.01.1999</p>
+                                <button type="button" class="btn btn-xs btn-outline-primary ">Voir les rendez-vous</button>
+                                <button type="button" class="btn btn-xs btn-outline-secondary">Modifier</button>
+                                <button type="button" class="btn btn-xs btn-outline-danger">Supprimer</button>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+
+                    <div class="card d-flex flex-row mb-3">
+                        <a class="d-flex pt-3 pl-2" href="#">
+                            <img src="img/People-Patient-Male-icon.png" alt="Goose Breast" class="list-thumbnail responsive border-0" style="height: 50px;" />
+                        </a>
+                        <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                            <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                                <a href="#" class="w-40 w-sm-100">
+                                    <p class="list-item-heading truncate">Amine Tellache</p>
+                                </a>
+                                <p class="mb-1 text-muted text-small w-15 w-sm-100">Homme</p>
+                                <p class="mb-1 text-muted text-small w-15 w-sm-100">30.04.1999</p>
+                                <button type="button" class="btn btn-xs btn-outline-primary ">Voir les rendez-vous</button>
+                                <button type="button" class="btn btn-xs btn-outline-secondary">Modifier</button>
+                                <button type="button" class="btn btn-xs btn-outline-danger">Supprimer</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- <script src="./js/vendor/jquery-3.3.1.min.js"></script> -->
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="./js/vendor/Chart.bundle.min.js"></script>
+    <script src="./js/vendor/chartjs-plugin-datalabels.js"></script>
+    <script src="./js/vendor/moment.min.js"></script>
+    <script src="./js/vendor/fullcalendar.min.js"></script>
+    <script src="./js/vendor/datatables.min.js"></script>
+    <script src="./js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="./js/vendor/owl.carousel.min.js"></script>
+    <script src="./js/vendor/progressbar.min.js"></script>
+    <script src="./js/vendor/jquery.barrating.min.js"></script>
+    <script src="./js/vendor/select2.full.js"></script>
+    <script src="./js/vendor/nouislider.min.js"></script>
+    <script src="./js/vendor/bootstrap-datepicker.js"></script>
+    <script src="./js/vendor/Sortable.js"></script>
+    <script src="./js/vendor/mousetrap.min.js"></script>
+    <script src="./js/dore.script.js"></script>
+    <script src="./js/scripts.js"></script>
+</body>
+
+</html>
