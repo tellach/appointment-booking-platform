@@ -20,15 +20,13 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
-
     }
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
-
+  mainWindow.loadFile(path.join('views', 'patient.html'))
+  mainWindow.maximize()
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
