@@ -1,11 +1,44 @@
 const ipc = require('electron').ipcRenderer;
 
-const syncBtn = document.getElementById('syncBtn');
+const getPatients = document.getElementById('getPatients');
+const getAppointments = document.getElementById('getAppointments');
+const addPatient = document.getElementById('addPatient');
+const addAppointment = document.getElementById('addAppointment');
+const getAppointmentsByPatient = document.getElementById('getAppointmentsByPatient');
+const getCurrentDayAppointments = document.getElementById('getCurrentDayAppointments');
 
-syncBtn.addEventListener('click', function(){
-    console.log('sync msg 1')
-    const reply = ipc.sendSync('sync-message');
+
+
+
+
+
+getPatients.addEventListener('click', function(){
+    const reply = ipc.sendSync('getPatients');
     console.log(reply);
-    console.log('sync msg 2')
+    
+})
+addPatient.addEventListener('click', function(){
+    const reply = ipc.sendSync('addPatient');
+    console.log(reply);
+    
+})
+getAppointments.addEventListener('click', function(){
+    const reply = ipc.sendSync('getAppointments');
+    console.log(reply);
+    
+})
+addAppointment.addEventListener('click', function(){
+    const reply = ipc.sendSync('addAppointment');
+    console.log(reply);
+    
+})
+getAppointmentsByPatient.addEventListener('click', function(){
+    const reply = ipc.sendSync('getAppointmentsByPatient');
+    console.log(reply);
+    
+})
+getCurrentDayAppointments.addEventListener('click', function(){
+    const reply = ipc.sendSync('getCurrentDayAppointments');
+    console.log(reply);
     
 })

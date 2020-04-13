@@ -2,24 +2,21 @@ const {DataTypes} = require('sequelize');
 const {db} = require('./../config') 
 'use strict';
 module.exports = (db, DataTypes) => {
-    const Patient = db.define('patient', {
+    const Appointment = db.define('appointment', {
         // attributes
-        firstName: {
+        title: {
             type: DataTypes.STRING,
         },
-        lastName: {
-            type: DataTypes.STRING 
-        },
-        DateOfBirth: {
+        Date: {
             type: DataTypes.DATE
         },
     },
     {
         sequelize : db,
-        modelName: 'patients'
+        modelName: 'appointments'
         // options
 });
- 
-  return Patient;
-};
 
+  
+  return Appointment;
+};
