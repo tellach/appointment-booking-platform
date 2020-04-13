@@ -2,9 +2,15 @@
 const electron = require("electron");
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
-const {getPatients} = require('./controllers/patientController')
+const {getPatients,addPatient} = require('./controllers/patientController')
+const {getAppointments,addAppointment,getAppointmentsByPatient,getCurrentDayAppointments} = require('./controllers/appointmentController')
+
 const ipc = electron.ipcMain;
 const dialog = require('electron').dialog;
+const {Patient,Appointment} = require('./config')
+
+
+
 
 app.allowRendererProcessReuse = false;
 
@@ -25,7 +31,17 @@ function createWindow () {
   // mainWindow.webContents.openDevTools()
 }
 
-ipc.on('sync-message',getPatients)
+ipc.on('getPatients',getPatients)
+ipc.on('getAppointments',getAppointments)
+ipc.on('addPatient',addPatient)
+ipc.on('addAppointment',addAppointment)
+ipc.on('getAppointmentsByPatient',getAppointmentsByPatient)
+ipc.on('getCurrentDayAppointments',getCurrentDayAppointments)
+
+
+
+
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
