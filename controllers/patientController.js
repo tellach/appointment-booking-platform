@@ -11,12 +11,14 @@ function getPatients(event, arg) {
 function addPatient(event, arg) {
   firstName = "adel"
   lastName = "namani"
-  DateOfBirth = Date.now()
+  dateOfBirth = '1999-05-30'
+  gender = "femme"
 
   Patient.create({
     firstName: firstName,
     lastName: lastName,
-    DateOfBirth: DateOfBirth
+    dateOfBirth: dateOfBirth,
+    gender: gender
 
   }).then(patient => {
     event.returnValue = patient;

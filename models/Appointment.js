@@ -7,7 +7,7 @@ module.exports = (db, DataTypes) => {
         title: {
             type: DataTypes.STRING,
         },
-        Date: {
+        date: {
             type: DataTypes.DATE
         },
     },

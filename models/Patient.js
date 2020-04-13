@@ -10,8 +10,11 @@ module.exports = (db, DataTypes) => {
         lastName: {
             type: DataTypes.STRING 
         },
-        DateOfBirth: {
+        dateOfBirth: {
             type: DataTypes.DATE
+        },
+        gender: {
+            type: DataTypes.TIME
         },
     },
     {

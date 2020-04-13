@@ -3,7 +3,7 @@ const electron = require("electron");
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const {getPatients,addPatient} = require('./controllers/patientController')
-const {getAppointments,addAppointment,getAppointmentsByPatient,getCurrentDayAppointments} = require('./controllers/appointmentController')
+const {getAppointments,addAppointment,getAppointmentsByPatient,getCurrentDayAppointments,deleteAppointment} = require('./controllers/appointmentController')
 
 const ipc = electron.ipcMain;
 const dialog = require('electron').dialog;
@@ -39,6 +39,7 @@ ipc.on('addPatient',addPatient)
 ipc.on('addAppointment',addAppointment)
 ipc.on('getAppointmentsByPatient',getAppointmentsByPatient)
 ipc.on('getCurrentDayAppointments',getCurrentDayAppointments)
+ipc.on('deleteAppointment',deleteAppointment)
 
 
 

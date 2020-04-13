@@ -16,25 +16,52 @@ function getAppointments(event, arg) {
     }).catch((err)=>console.log(err))
     
   }
-
+                                    
   function getCurrentDayAppointments(event, arg) {
-    currentDate = Date.now()
-    Appointment.findAll({where: {Date:currentDate}}).then(appointments => {
+    const date = new Date(Date.now())
+    //currentDate = '\'%'+date.getFullYear().toString()+'-0'+(date.getMonth()+1).toString()+'-'+date.getDate().toString()+''
+    Appointment.findAll({where: {date:date}}).then(appointments => {
       
       event.returnValue =appointments;
     }).catch((err)=>console.log(err))
-    
+  
   }
+  function updateAppointment (event, arg){
+            appointmentId = 1
+            Appointment.findOne(        {
+                where: {
+                    id: appointmentId // deletes all pugs whose age is 7
+                }
+            }).then((appointmentfound)=>{
+                    if(appointmentfound)
+                    {
+                        Appointment.update(
+                            req.body,
+                            {
+                                where: {
+                                    id: appointmentId
+                                }
+                            }).then(()=> res.json({message:'update successfully'}))
+                            .catch((err)=>res.send(err))
+                    }
+                    else {
+                        res.send('Appointment not found')
+                    }
+                }
+
+            )
+
+};
 
   function addAppointment(event, arg) {
-    title = "rdv3"
-    DateA = new Date('2020-12-17T03:24:00');
+    title = "rdv1"
+    date = new Date(Date.now())
     patientId = 1
     Patient.findOne({where: {id:patientId}}).then((patientFound)=>{
         if (patientFound) {
             Appointment.create({
                 title: title,
-                Date: DateA,
+                date: date,
                 patientId: patientId
             
               }).then(appointment => {
@@ -46,4 +73,21 @@ function getAppointments(event, arg) {
     })
   }
 
-module.exports = {getAppointments,addAppointment,getAppointmentsByPatient,getCurrentDayAppointments}
+  function deleteAppointment (event, arg){
+
+            appointmentId = 1
+            Appointment.destroy(
+                {
+                    where: {
+                        id: appointmentId
+                    },
+
+                }).then(()=> event.returnValue = 'delete successfully')
+                .catch((err)=> event.returnValue = 'error')
+        }
+
+
+
+
+
+module.exports = {getAppointments,addAppointment,getAppointmentsByPatient,getCurrentDayAppointments,updateAppointment,deleteAppointment}
