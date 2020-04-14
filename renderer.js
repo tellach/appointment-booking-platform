@@ -7,6 +7,8 @@ const addAppointment = document.getElementById('addAppointment');
 const getAppointmentsByPatient = document.getElementById('getAppointmentsByPatient');
 const getCurrentDayAppointments = document.getElementById('getCurrentDayAppointments');
 const deleteAppointment = document.getElementById('deleteAppointment');
+const updateAppointmentDate = document.getElementById('updateAppointmentDate');
+
 
 
 
@@ -46,6 +48,11 @@ getCurrentDayAppointments.addEventListener('click', function(){
 })
 deleteAppointment.addEventListener('click', function(){
     const reply = ipc.sendSync('deleteAppointment');
+    console.log(reply);
+    
+})
+updateAppointmentDate.addEventListener('click', function(){
+    const reply = ipc.sendSync('updateAppointmentDate');
     console.log(reply);
     
 })
