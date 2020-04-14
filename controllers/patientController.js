@@ -1,7 +1,7 @@
 const { Patient } = require('./../config')
 
 function getPatients(event, arg) {
-  Patient.findAll().then(patiens => {
+  Patient.findAll({raw : true}).then(patiens => {
 
     event.returnValue = patiens;
   }).catch((err) => console.log(err))

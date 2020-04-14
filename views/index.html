@@ -83,13 +83,13 @@
             <div class="scroll">
                 <ul class="list-unstyled">
                     <li class="active">
-                        <a>
+                        <a href="./index.html">
                             <i class="iconsmind-Monitor-Laptop"></i>
                             <span>Tableau de bord</span>
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a id="patients-link" href="./patients.html">
                             <i class="iconsmind-MaleFemale"></i>Patients
                         </a>
                     </li>
@@ -129,11 +129,11 @@
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title">Recent Orders</h5>
-                            <div class="scroll dashboard-list-with-thumbs">
+                            <h5 class="card-title">Rendez-vous d'aujourd'hui</h5>
+                            <div class="scroll dashboard-list-with-thumbs" id="currentDayAppointments">
                                 <div class="d-flex flex-row mb-3">
                                     <a class="d-block position-relative" href="#">
-                                        <img src="img/marble-cake-thumb.jpg" alt="Marble Cake"
+                                        <img src="img/People-Patient-Female-icon.png" alt="Marble Cake"
                                             class="list-thumbnail border-0" />
                                         <span
                                             class="badge badge-pill badge-theme-2 position-absolute badge-top-right">NEW</span>
@@ -266,32 +266,7 @@
         </div>
     </main>
 
-    <!--    </br></br>
-
-    <button id="getPatients">afficher la liste des patients</button>
-  </br></br>
-
-  <button id="addPatient">ajouter un patient</button>
-
-  </br></br>
-
-  <button id="getAppointments">afficher la liste des rendez vous</button>
-
-</br></br>
-
-<button id="addAppointment">ajouter un rendez vous</button>
-
-</br></br>
-
-<button id="getAppointmentsByPatient">afficher la liste des rendez vous d'un patient</button>
     
-</br></br>
-
-<button id="getCurrentDayAppointments">afficher la liste des rendez vous du jour</button>
-
-</br></br>
-
-<button id="deleteAppointment">supprimer un rendez vous</button> -->
 
 
     <!-- <script src="./js/vendor/jquery-3.3.1.min.js"></script> -->
@@ -314,6 +289,7 @@
     <script src="./js/vendor/mousetrap.min.js"></script>
     <script src="./js/dore.script.js"></script>
     <script src="./js/scripts.js"></script>
+    <script src="./dashboard.js"></script>
 </body>
 
 </html>

@@ -25,10 +25,11 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index1.html'))
+  mainWindow.loadFile(path.join('views', 'index.html'))
   mainWindow.maximize()
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+  
 }
 
 ipc.on('getPatients',getPatients)

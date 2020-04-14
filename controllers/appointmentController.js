@@ -10,26 +10,30 @@ function getAppointments(event, arg) {
 }
 function getAppointmentsByPatient(event, arg) {
   patientId = 1
-  Appointment.findAll({ where: { patientId: patientId } }).then(appointments => {
-
+  Appointment.findAll({ where: { patientId: patientId }, raw : true }).then(appointments => {
     event.returnValue = appointments;
   }).catch((err) => console.log(err))
-
 }
 
 function getCurrentDayAppointments(event, arg) {
-  const startDate  = new Date()
+  
+  let startDate  = new Date()
+  startDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate(),00,00,0,1)
   const endDate  = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate(),25,59,0,1)
-
+  console.log(startDate,endDate)
   Appointment.findAll({
     where: {
-      date: {[Op.between]: [startDate, endDate], }
-      }
+        date: {[Op.between]: [startDate, endDate], }
+      },
+      raw : true,
+      include: [{
+        model: Patient
+      }]
   }).then(appointments => {
        event.returnValue = appointments
   }).catch((err) => console.log(err))
-
 }
+
 function updateAppointmentDate(event, arg) {
   appointmentId = 3
   const date = new Date()
