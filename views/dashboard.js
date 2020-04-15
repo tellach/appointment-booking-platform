@@ -29,6 +29,7 @@ function loadTodayAppointments(){
     currentDayAppointments.innerHTML = appoitmentsItems
 }
 
+
 document.addEventListener("DOMContentLoaded", function(){
     loadTodayAppointments()
 });

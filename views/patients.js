@@ -1,8 +1,7 @@
 const ipc = require('electron').ipcRenderer;
 
 function loadPatients(){
-    const patients = ipc.sendSync('getPatients');
-    console.log(patients)
+    const patients = ipc.sendSync('getPatients')
     const patientsItems = patients.reduce((html,p)=>{
         html +=`
         <div class="card d-flex flex-row mb-3">
@@ -18,7 +17,7 @@ function loadPatients(){
                             <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.dateOfBirth.split(' ')[0]}</p>
                             <button type="button" class="btn btn-xs btn-outline-primary ">Voir les rendez-vous</button>
                             <button type="button" class="btn btn-xs btn-outline-secondary">Modifier</button>
-                            <button type="button" class="btn btn-xs btn-outline-danger">Supprimer</button>
+                            <button type="button" class="btn btn-xs btn-outline-danger" onClick="deletePatient(${p.id})">Supprimer</button>
                         </div>
                         
                     </div>
@@ -26,8 +25,13 @@ function loadPatients(){
         `
         return html
     }, '')
-    const currentDayAppointments = document.getElementById('patientsList');
+    const currentDayAppointments = document.getElementById('patientsList')
     currentDayAppointments.innerHTML = patientsItems
+}
+
+function deletePatient(id){
+    const patients = ipc.sendSync('deletePatient',id)
+    loadPatients()
 }
 
 document.addEventListener("DOMContentLoaded", function(){

@@ -26,5 +26,16 @@ function addPatient(event, arg) {
 
 }
 
+function deletePatient(event, patientId) {
+  Patient.destroy(
+    {
+      where: {
+        id: patientId
+      },
 
-module.exports = { getPatients, addPatient }
+    }).then(() => event.returnValue = 'delete successfully')
+    .catch((err) => event.returnValue = 'error')
+}
+
+
+module.exports = { getPatients,addPatient, deletePatient }
