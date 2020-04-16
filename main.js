@@ -46,28 +46,32 @@ function main() {
     }
   })
 
+  ipc.on('addPatient', (event, arg)=>{
+    firstName = arg['firstName']
+    lastName = arg['lastName']
+    dateOfBirth = arg['dateOfBirth']
+    gender = arg['gender']
+  
+    Patient.create({
+      firstName: firstName,
+      lastName: lastName,
+      dateOfBirth: dateOfBirth,
+      gender: gender
+  
+    }).then(() => {
+      mainWindow.send('updatedPatients')
+      addPatientWin.close()
+      console.log('updatedPatients is sent !')
+    });
+  
+  })
+
 }
 
 ipc.on('getPatients', getPatients)
 ipc.on('getAppointments', getAppointments)
 
-ipc.on('addPatient', (event, arg)=>{
-  firstName = arg['firstName']
-  lastName = arg['lastName']
-  dateOfBirth = arg['dateOfBirth']
-  gender = arg['gender']
 
-  Patient.create({
-    firstName: firstName,
-    lastName: lastName,
-    dateOfBirth: dateOfBirth,
-    gender: gender
-
-  }).then(patient => {
-    mainWindow.send('todos',updatedTodos)
-  });
-
-})
 
 ipc.on('addAppointment', addAppointment)
 ipc.on('getAppointmentsByPatient', getAppointmentsByPatient)

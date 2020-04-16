@@ -6,7 +6,7 @@ function loadPatients(){
         html +=`
         <div class="card d-flex flex-row mb-3">
                     <a class="d-flex pt-3 pl-2" href="#">
-                        <img src="${p.gender == 'homme' ? 'img/People-Patient-Male-icon.png' : 'img/People-Patient-Female-icon.png'}" alt="Goose Breast" class="list-thumbnail responsive border-0" style="height: 50px;" />
+                        <img src="${p.gender == 'Homme' ? 'img/People-Patient-Male-icon.png' : 'img/People-Patient-Female-icon.png'}" alt="Goose Breast" class="list-thumbnail responsive border-0" style="height: 50px;" />
                     </a>
                     <div class="pl-2 d-flex flex-grow-1 min-width-zero">
                         <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
@@ -40,7 +40,10 @@ document.addEventListener("DOMContentLoaded", function(){
     });
     loadPatients()
 
-    ipc.on('updatedPatients',loadPatients)
+    ipc.on('updatedPatients',()=>{
+        console.log('updatedPatients receivec !')
+        loadPatients()
+    })
 });
     
 module.exports = { loadPatients }

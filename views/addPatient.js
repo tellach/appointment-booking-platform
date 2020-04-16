@@ -1,5 +1,4 @@
 const ipc = require('electron').ipcRenderer;
-const {loadPatients} = require('./patients')
 
 document.querySelector('form').addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -11,6 +10,5 @@ document.querySelector('form').addEventListener('submit',(e)=>{
         'gender'        :  formdata.get('gender'),
     }
     ipc.sendSync('addPatient',data)
-    loadPatients()
 })
     
