@@ -9,10 +9,10 @@ function getPatients(event, arg) {
 }
 
 function addPatient(event, arg) {
-  firstName = "adel"
-  lastName = "namani"
-  dateOfBirth = '1999-05-30'
-  gender = "femme"
+  firstName = arg['firstName']
+  lastName = arg['lastName']
+  dateOfBirth = arg['dateOfBirth']
+  gender = arg['gender']
 
   Patient.create({
     firstName: firstName,

@@ -35,7 +35,12 @@ function deletePatient(id){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById('addPatient').addEventListener('click',()=>{
+        ipc.send('createPatient')
+    });
     loadPatients()
+
+    ipc.on('updatedPatients',loadPatients)
 });
     
 module.exports = { loadPatients }

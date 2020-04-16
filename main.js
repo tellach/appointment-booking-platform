@@ -1,20 +1,20 @@
 // Modules to control application life and create native browser window
 const electron = require("electron");
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
-const {getPatients,addPatient,deletePatient} = require('./controllers/patientController')
-const {getAppointments,addAppointment,getAppointmentsByPatient,getCurrentDayAppointments,deleteAppointment,updateAppointmentDate} = require('./controllers/appointmentController')
-
+const { getPatients, addPatient, deletePatient } = require('./controllers/patientController')
+const { getAppointments, addAppointment, getAppointmentsByPatient, getCurrentDayAppointments, deleteAppointment, updateAppointmentDate } = require('./controllers/appointmentController')
+const Window = require('./helpers/Window')
 const ipc = electron.ipcMain;
 const dialog = require('electron').dialog;
-const {Patient,Appointment} = require('./config')
+const { Patient, Appointment } = require('./config')
 
 
 
 
 app.allowRendererProcessReuse = false;
 
-function createWindow () {
+function main() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -29,18 +29,53 @@ function createWindow () {
   mainWindow.maximize()
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
-  
+
+  let addPatientWin
+  ipc.on('createPatient', () => {
+    if (!addPatientWin) {
+      addPatientWin = new Window({
+        file: path.join('views', 'addPatient.html'),
+        width: 500,
+        height: 700,
+        parent: mainWindow
+      })
+
+      addPatientWin.on('close', () => {
+        addPatientWin = null
+      })
+    }
+  })
+
 }
 
-ipc.on('getPatients',getPatients)
-ipc.on('getAppointments',getAppointments)
-ipc.on('addPatient',addPatient)
-ipc.on('addAppointment',addAppointment)
-ipc.on('getAppointmentsByPatient',getAppointmentsByPatient)
-ipc.on('getCurrentDayAppointments',getCurrentDayAppointments)
-ipc.on('deleteAppointment',deleteAppointment)
-ipc.on('deletePatient',deletePatient)
-ipc.on('updateAppointmentDate',updateAppointmentDate)
+ipc.on('getPatients', getPatients)
+ipc.on('getAppointments', getAppointments)
+
+ipc.on('addPatient', (event, arg)=>{
+  firstName = arg['firstName']
+  lastName = arg['lastName']
+  dateOfBirth = arg['dateOfBirth']
+  gender = arg['gender']
+
+  Patient.create({
+    firstName: firstName,
+    lastName: lastName,
+    dateOfBirth: dateOfBirth,
+    gender: gender
+
+  }).then(patient => {
+    mainWindow.send('todos',updatedTodos)
+  });
+
+})
+
+ipc.on('addAppointment', addAppointment)
+ipc.on('getAppointmentsByPatient', getAppointmentsByPatient)
+ipc.on('getCurrentDayAppointments', getCurrentDayAppointments)
+ipc.on('deleteAppointment', deleteAppointment)
+ipc.on('deletePatient', deletePatient)
+ipc.on('updateAppointmentDate', updateAppointmentDate)
+
 
 
 
@@ -51,7 +86,7 @@ ipc.on('updateAppointmentDate',updateAppointmentDate)
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow)
+app.whenReady().then(main)
 
 // Quit when all windows are closed.`
 app.on('window-all-closed', function () {
@@ -63,7 +98,7 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  if (BrowserWindow.getAllWindows().length === 0) main()
 })
 
 // In this file you can include the rest of your app's specific main process
