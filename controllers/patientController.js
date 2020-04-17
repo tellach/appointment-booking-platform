@@ -8,6 +8,7 @@ function getPatients(event, arg) {
 
 }
 
+
 function addPatient(event, arg) {
   firstName = arg['firstName']
   lastName = arg['lastName']

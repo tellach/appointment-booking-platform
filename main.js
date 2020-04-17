@@ -49,6 +49,48 @@ function main() {
     // for synchronization  
     event.returnValue = patientId2
   })
+  ipc.on('getPatientById', (event, arg)=>{
+    Patient.findOne({where: { id: patientId2 },raw : true}).then(patien => {
+
+      event.returnValue = patien;
+    }).catch((err) => console.log(err))
+  })
+  ipc.on('updatePatient', (event, arg)=>{
+    firstName = arg['firstName']
+    lastName = arg['lastName']
+    dateOfBirth = arg['dateOfBirth']
+    gender = arg['gender']
+    Patient.findOne({
+      where: {
+        id: patientId2 // deletes all pugs whose age is 7
+      }
+    }).then((patientfound) => {
+      if (patientfound) {
+        Patient.update(
+          {
+            firstName: firstName,
+            lastName: lastName,
+            dateOfBirth: dateOfBirth,
+            gender: gender
+          },
+          {
+            where: {
+              id: patientId2
+            }
+          }).then(() => {
+            mainWindow.send('updatedPatients')
+            updatePatientWin.close()
+            event.returnValue = 'update successfully' 
+          })
+          .catch((err) => event.returnValue = 'error')
+      }
+      else {
+        event.returnValue = 'Appointment not found'
+      }
+    })
+  })
+
+
 
   var patientId1 ;
   let getPatientAppointmentWin
@@ -125,8 +167,6 @@ function main() {
 
 ipc.on('getPatients', getPatients)
 ipc.on('getAppointments', getAppointments)
-
-
 
 ipc.on('addAppointment', addAppointment)
 ipc.on('getAppointmentsByPatient', getAppointmentsByPatient)
