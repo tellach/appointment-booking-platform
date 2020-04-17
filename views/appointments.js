@@ -1,9 +1,14 @@
 const ipc = require('electron').ipcRenderer;
 
-function loadTodayAppointments(){
-    const appoitments = ipc.sendSync('getCurrentDayAppointments');
-    console.log(appoitments)
-    const appoitmentsItems = appoitments.reduce((html,app)=>{
+document.querySelector('form').addEventListener('submit',(e)=>{
+    e.preventDefault()
+    var formdata = new FormData(document.querySelector('form'))
+    data = {
+        'date'     :  formdata.get('date'),
+    }
+    const appointments = ipc.sendSync('getAppointmentsByDate',data)
+    console.log(appointments)
+    const appoitmentsItems = appointments.reduce((html,app)=>{
         html +=`
         <div class="d-flex flex-row mb-3">
                                     <a class="d-block position-relative" href="#">
@@ -29,11 +34,6 @@ function loadTodayAppointments(){
     }, '')
     const currentDayAppointments = document.getElementById('currentDayAppointments');
     currentDayAppointments.innerHTML = appoitmentsItems
-}
 
+})
 
-document.addEventListener("DOMContentLoaded", function(){
-    loadTodayAppointments()
-});
-    
-module.exports = { loadTodayAppointments }

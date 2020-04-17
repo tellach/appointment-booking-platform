@@ -30,6 +30,22 @@ function main() {
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
+  ////////////////////////////////// getAppointmentsByDate /////////////////////////////////////
+
+  ipc.on('getAppointmentsByDate', (event, arg)=>{
+    date = arg['date']
+    Appointment.findAll({where: { date: date },raw : true,
+      include: [{
+      model: Patient
+    }]
+  }).then(appointments => {
+
+      event.returnValue = appointments;
+    }).catch((err) => console.log(err))
+  })
+
+
+  
   ////////////////////////////////// addAppointment /////////////////////////////////////
 
   var patientId3;
