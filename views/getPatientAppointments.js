@@ -17,7 +17,7 @@ function getPatientAppointments(id){
                                                 <p class="text-muted mb-1 text-small">${app.title}</p>
                                             </div>
                                             <div class="text-primary text-small font-weight-medium d-none d-sm-block">
-                                                ${app.date.split(' ')[1].split('.')[0]}
+                                                ${app.date.split(' ')[0] + ' ' +app.date.split(' ')[1].split('.')[0]}
                                             </div>
                                         </a>
                                     </div>

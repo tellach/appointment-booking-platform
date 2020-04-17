@@ -16,7 +16,7 @@ function loadTodayAppointments(){
                                         <a href="#">
                                             <p class="list-item-heading">${app['patient.lastName']+' '+app['patient.firstName']}</p>
                                             <div class="pr-4 d-none d-sm-block">
-                                                <p class="text-muted mb-1 text-small">${app.title}</p>
+                                                <p class="text-muted mb-1 text-small">${app.title} ${app.id}</p>
                                             </div>
                                             <div class="text-primary text-small font-weight-medium d-none d-sm-block">
                                                 ${app.date.split(' ')[1].split('.')[0]}

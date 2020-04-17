@@ -15,7 +15,8 @@ function loadPatients(){
                             </a>
                             <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.gender}</p>
                             <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.dateOfBirth.split(' ')[0]}</p>
-                            <button type="button" class="btn btn-xs btn-outline-primary" onClick="getPatientAppointments(${p.id})">Voir les rendez-vous</button>
+                            <button type="button" class="btn btn-xs btn-outline-primary" onClick="addAppointment(${p.id})">Ajouter un rendez-vous</button>
+                            <button type="button" class="btn btn-xs btn-outline-info" onClick="getPatientAppointments(${p.id})">Voir les rendez-vous</button>
                             <button type="button" class="btn btn-xs btn-outline-secondary" onClick="updatePatient(${p.id})">Modifier</button>
                             <button type="button" class="btn btn-xs btn-outline-danger" onClick="deletePatient(${p.id})">Supprimer</button>
                         </div>
@@ -46,6 +47,14 @@ function updatePatient(id){
         'id': id,
     }
     const patientId = ipc.sendSync('updatePatientPage',data)
+    
+}
+
+function addAppointment(id){
+    data = {
+        'id': id,
+    }
+    const patientId = ipc.sendSync('addAppointmentPage',data)
     
 }
 

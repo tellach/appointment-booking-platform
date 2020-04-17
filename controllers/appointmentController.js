@@ -87,7 +87,7 @@ function addAppointment(event, arg) {
 
 function deleteAppointment(event, arg) {
 
-  appointmentId = 3
+  appointmentId = 25
   Appointment.destroy(
     {
       where: {

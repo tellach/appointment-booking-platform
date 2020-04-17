@@ -29,6 +29,49 @@ function main() {
   mainWindow.maximize()
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
+
+  ////////////////////////////////// addAppointment /////////////////////////////////////
+
+  var patientId3 ;
+  let addAppointmentWin
+  ipc.on('addAppointmentPage', (event,arg) => {
+    console.log(arg)
+    patientId3 = arg['id']
+    if (!addAppointmentWin) {
+      addAppointmentWin = new Window({
+        file: path.join('views', 'addAppointment.html'),
+        width: 500,
+        height: 600,
+        parent: mainWindow
+      })
+
+      addAppointmentWin.on('close', () => {
+        addAppointmentWin = null
+      })
+    }
+    // for synchronization  
+    event.returnValue = patientId3
+  })
+
+  ipc.on('addAppointment', (event, arg)=>{
+    title = arg['title']
+    date = arg['date']
+
+    Appointment.create({
+      title: title,
+      date: date,
+      patientId :patientId3
+
+  
+    }).then(() => {
+      mainWindow.send('updatedAppointments')
+      addAppointmentWin.close()
+      console.log('updatedAppointments is sent !')
+    });
+  
+  })
+
+  ////////////////////////////////// updatePatient /////////////////////////////////////
   var patientId2 ;
   let updatePatientWin
   ipc.on('updatePatientPage', (event,arg) => {
@@ -90,6 +133,7 @@ function main() {
     })
   })
 
+  ////////////////////////////////// getPatientAppointments /////////////////////////////////////
 
 
   var patientId1 ;
@@ -123,6 +167,9 @@ function main() {
       event.returnValue = appointments;
     }).catch((err) => console.log(err))
   })
+
+
+  ////////////////////////////////// createPatient /////////////////////////////////////
 
 
   let addPatientWin

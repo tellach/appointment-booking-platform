@@ -24,10 +24,10 @@ db
 const Patient = PatientModel(db, DataTypes)
 const Appointment = AppointmentModel(db, DataTypes)
 
-Appointment.belongsTo(Patient)
-Patient.hasMany(Appointment)
+Appointment.belongsTo(Patient,{onDelete: 'cascade', hooks:true})
+Patient.hasMany(Appointment,)
 
-db.sync({ force: false })
+db.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
   })
