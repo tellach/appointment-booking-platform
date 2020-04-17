@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Liste des patients</title>
+    <title>Dore jQuery</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="font/iconsmind/style.css" />
@@ -47,7 +47,7 @@
             </a>
 
             <div class="search" data-search-path="Layouts.Search.html?q=">
-                <input placeholder="Search...">
+                <input placeholder="Recherche...">
                 <span class="search-icon">
                     <i class="simple-icon-magnifier"></i>
                 </span>
@@ -55,11 +55,11 @@
         </div>
 
 
-        
+
 
         <div class="navbar-right">
             <div class="header-icons d-inline-block align-middle">
-            
+
 
                 <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton">
                     <i class="simple-icon-size-fullscreen"></i>
@@ -69,8 +69,7 @@
             </div>
 
             <div class="user d-inline-block">
-                <button class="btn btn-empty p-0" type="button"  aria-haspopup="true"
-                    aria-expanded="false">
+                <button class="btn btn-empty p-0" type="button" aria-haspopup="true" aria-expanded="false">
                     <span class="name">Sergio Kortney</span>
                     <span>
                         <img alt="Profile Picture" src="img/People-Doctor-Male-icon.png" />
@@ -83,13 +82,13 @@
         <div class="main-menu">
             <div class="scroll">
                 <ul class="list-unstyled">
-                    <li>
+                    <li class="active">
                         <a href="./index.html">
                             <i class="iconsmind-Monitor-Laptop"></i>
                             <span>Tableau de bord</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a id="patients-link" href="./patients.html">
                             <i class="iconsmind-MaleFemale"></i>Patients
                         </a>
@@ -100,7 +99,7 @@
                         </a>
                     </li>
                     <li>
-                        <a >
+                        <a>
                             <i class="simple-icon-settings"></i>Configurations
                         </a>
                     </li>
@@ -110,54 +109,53 @@
     </div>
 
     <main>
-        
-    <div class="container-fluid disable-text-selection">
-        <div class="row">
-            <div class="col-12">
-                <div class="mb-3">
-                    <h1>Liste des patients</h1>
-                    <div class="float-sm-right text-zero">
-                        <button type="button" class="btn btn-primary btn-lg mr-1" id="addPatient">Ajouter un patient</button>
-                    </div>
+        <div class="container-fluid">
+            <div class="row  ">
+                <div class="col-12">
 
+                    <h1>Liste des Rendez-vous d'un jour donné</h1>
+
+                    <div class="separator mb-5"></div>
+                    <form>
+                        <div class="form-group mb-3">
+                            <div class="form-inline">
+                                <input class="form-control datepicker" placeholder="Date" style="margin-right:10px;" name="date">
+                                <button type="submit" class="btn btn-primary mb-0">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    
                 </div>
 
-                <div class="mb-2">
-                    <a class="btn pt-0 pl-0 d-inline-block d-md-none" data-toggle="collapse" href="#displayOptions"
-                        role="button" aria-expanded="true" aria-controls="displayOptions">
-                        Display Options
-                        <i class="simple-icon-arrow-down align-middle"></i>
-                    </a>
-                    <div class="collapse d-md-block" id="displayOptions">
-                        <div class="d-block d-md-inline-block">
-                            <div class="btn-group float-md-left mr-1 mb-1">
-                                <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Trier par
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Age</a>
-                                    <a class="dropdown-item" href="#">Dernier rendez-vous</a>
-                                </div>
-                            </div>
-                            <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
-                                <input placeholder="Recherche...">
+                <div class="col-xl-6 col-lg-12 mb-4">
+                    <div class="card">
+                        <div class="position-absolute card-top-buttons">
+                            <button class="btn btn-header-light icon-button">
+                                <i class="simple-icon-refresh"></i>
+                            </button>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Liste des Rendez-vous </h5>
+                            <div class="scroll dashboard-list-with-thumbs" id="currentDayAppointments">
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="separator mb-5"></div>
+                <div class="col-xl-6 col-lg-12 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Calendrier</h5>
+                            <div class="calendar"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12 list" data-check-all="checkAll" id="patientsList">
-
-            </div>
-        </div>
-    </div>
-
     </main>
+
+    
 
 
     <!-- <script src="./js/vendor/jquery-3.3.1.min.js"></script> -->
@@ -180,7 +178,7 @@
     <script src="./js/vendor/mousetrap.min.js"></script>
     <script src="./js/dore.script.js"></script>
     <script src="./js/scripts.js"></script>
-    <script src="./patients.js"></script>
+    <script src="./appointments.js"></script>
 </body>
 
 </html>

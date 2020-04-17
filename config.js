@@ -27,7 +27,7 @@ const Appointment = AppointmentModel(db, DataTypes)
 Appointment.belongsTo(Patient,{onDelete: 'cascade', hooks:true})
 Patient.hasMany(Appointment,)
 
-db.sync({ force: true })
+db.sync({ force: false })
   .then(() => {
     console.log(`Database & tables created!`)
   })
