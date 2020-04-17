@@ -23,117 +23,28 @@
 </head>
 
 <body id="app-container" class="menu-default show-spinner">
-    <nav class="navbar fixed-top">
-        <div class="d-flex align-items-center navbar-left">
-            <a href="#" class="menu-button d-none d-md-block">
-                <svg class="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 17">
-                    <rect x="0.48" y="0.5" width="7" height="1" />
-                    <rect x="0.48" y="7.5" width="7" height="1" />
-                    <rect x="0.48" y="15.5" width="7" height="1" />
-                </svg>
-                <svg class="sub" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17">
-                    <rect x="1.56" y="0.5" width="16" height="1" />
-                    <rect x="1.56" y="7.5" width="16" height="1" />
-                    <rect x="1.56" y="15.5" width="16" height="1" />
-                </svg>
-            </a>
-
-            <a href="#" class="menu-button-mobile d-xs-block d-sm-block d-md-none">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
-                    <rect x="0.5" y="0.5" width="25" height="1" />
-                    <rect x="0.5" y="7.5" width="25" height="1" />
-                    <rect x="0.5" y="15.5" width="25" height="1" />
-                </svg>
-            </a>
-
-            <div class="search" data-search-path="Layouts.Search.html?q=">
-                <input placeholder="Search...">
-                <span class="search-icon">
-                    <i class="simple-icon-magnifier"></i>
-                </span>
-            </div>
-        </div>
-
-
-
-
-        <div class="navbar-right">
-            <div class="header-icons d-inline-block align-middle">
-
-
-                <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton">
-                    <i class="simple-icon-size-fullscreen"></i>
-                    <i class="simple-icon-size-actual"></i>
-                </button>
-
-            </div>
-
-            <div class="user d-inline-block">
-                <button class="btn btn-empty p-0" type="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="name">Sergio Kortney</span>
-                    <span>
-                        <img alt="Profile Picture" src="img/People-Doctor-Male-icon.png" />
-                    </span>
-                </button>
-            </div>
-        </div>
-    </nav>
-    <div class="sidebar">
-        <div class="main-menu">
-            <div class="scroll">
-                <ul class="list-unstyled">
-                    <li>
-                        <a>
-                            <i class="iconsmind-Monitor-Laptop"></i>
-                            <span>Tableau de bord</span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a>
-                            <i class="iconsmind-MaleFemale"></i>Patients
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="iconsmind-Timer-2"></i>Rendez-vous
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="simple-icon-settings"></i>Configurations
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <main>
+    <main style="margin-left: 50px;margin-top: 40px;">
         <div class="container-fluid disable-text-selection">
             <div class="row">
                 <div class="col-12">
-                    <div class="mb-3">
-                        <h1>Profil d'un patient</h1>
-                        <div class="float-sm-right text-zero">
-                            <button type="button" class="btn btn-primary btn-lg mr-1">Modifier</button>
-                        </div>
-
+                    <div class="mb-3 justify-content-between">
+                        <h1>Profil du patient</h1>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-12 mb-4">
+                        <div class="col-lg-4 col-12 mb-4" id="profile">
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div class="text-center">
                                         <img alt="Profile" src="img/People-Patient-Male-icon.png" class="img-thumbnail border-0 rounded-circle mb-4 list-thumbnail">
                                         <p class="list-item-heading mb-1">Namani Adel</p>
                                         <p class="mb-4 text-muted text-small">Né le 11-01-1999</p>
-                                        <button type="button" class="btn btn-sm btn-outline-primary ">Modifier</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-8 col-12 mb-4">
-                            <div class="col-12 list">
+                            <h2 class="mb-3 ml-3">Liste des rendez-vous</h2>
+                            <div class="col-12 scroll list dashboard-list-with-thumbs" id="patientAppointments">
                                 <div class="card d-flex flex-row mb-3">
                                     <div class="d-flex flex-grow-1 min-width-zero">
                                         <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
@@ -148,6 +59,104 @@
                                     </div>
                                 </div>
     
+                                <div class="card d-flex flex-row mb-3">
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#">
+                                                Opération
+                                            </a>
+                                            <p class="mb-1 text-muted text-small w-15 w-xs-100">01.05.2020</p>
+                                            <div class="w-15 w-xs-100 text-right">
+                                                <span class="badge badge-pill badge-primary">A venir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card d-flex flex-row mb-3">
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#">
+                                                Opération
+                                            </a>
+                                            <p class="mb-1 text-muted text-small w-15 w-xs-100">01.05.2020</p>
+                                            <div class="w-15 w-xs-100 text-right">
+                                                <span class="badge badge-pill badge-primary">A venir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card d-flex flex-row mb-3">
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#">
+                                                Opération
+                                            </a>
+                                            <p class="mb-1 text-muted text-small w-15 w-xs-100">01.05.2020</p>
+                                            <div class="w-15 w-xs-100 text-right">
+                                                <span class="badge badge-pill badge-primary">A venir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card d-flex flex-row mb-3">
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#">
+                                                Opération
+                                            </a>
+                                            <p class="mb-1 text-muted text-small w-15 w-xs-100">01.05.2020</p>
+                                            <div class="w-15 w-xs-100 text-right">
+                                                <span class="badge badge-pill badge-primary">A venir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card d-flex flex-row mb-3">
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#">
+                                                Opération
+                                            </a>
+                                            <p class="mb-1 text-muted text-small w-15 w-xs-100">01.05.2020</p>
+                                            <div class="w-15 w-xs-100 text-right">
+                                                <span class="badge badge-pill badge-primary">A venir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card d-flex flex-row mb-3">
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#">
+                                                Opération
+                                            </a>
+                                            <p class="mb-1 text-muted text-small w-15 w-xs-100">01.05.2020</p>
+                                            <div class="w-15 w-xs-100 text-right">
+                                                <span class="badge badge-pill badge-primary">A venir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card d-flex flex-row mb-3">
+                                    <div class="d-flex flex-grow-1 min-width-zero">
+                                        <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+                                            <a class="list-item-heading mb-1 truncate w-40 w-xs-100" href="#">
+                                                Opération
+                                            </a>
+                                            <p class="mb-1 text-muted text-small w-15 w-xs-100">01.05.2020</p>
+                                            <div class="w-15 w-xs-100 text-right">
+                                                <span class="badge badge-pill badge-primary">A venir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="card d-flex flex-row mb-3">
                                     <div class="d-flex flex-grow-1 min-width-zero">
                                         <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
@@ -193,6 +202,7 @@
     <script src="./js/vendor/mousetrap.min.js"></script>
     <script src="./js/dore.script.js"></script>
     <script src="./js/scripts.js"></script>
+    <script src="./getPatientAppointments.js"></script>
 </body>
 
 </html>

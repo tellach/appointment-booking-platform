@@ -10,7 +10,7 @@ function loadPatients(){
                     </a>
                     <div class="pl-2 d-flex flex-grow-1 min-width-zero">
                         <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
-                            <a href="#" class="w-40 w-sm-100">
+                            <a href="#" class="w-20 w-sm-100">
                                 <p class="list-item-heading truncate mb-0">${p.lastName+' '+p.firstName}</p>
                             </a>
                             <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.gender}</p>

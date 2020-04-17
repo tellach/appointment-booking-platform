@@ -32,9 +32,9 @@ function main() {
 
   ////////////////////////////////// addAppointment /////////////////////////////////////
 
-  var patientId3 ;
+  var patientId3;
   let addAppointmentWin
-  ipc.on('addAppointmentPage', (event,arg) => {
+  ipc.on('addAppointmentPage', (event, arg) => {
     console.log(arg)
     patientId3 = arg['id']
     if (!addAppointmentWin) {
@@ -53,28 +53,28 @@ function main() {
     event.returnValue = patientId3
   })
 
-  ipc.on('addAppointment', (event, arg)=>{
+  ipc.on('addAppointment', (event, arg) => {
     title = arg['title']
     date = arg['date']
 
     Appointment.create({
       title: title,
       date: date,
-      patientId :patientId3
+      patientId: patientId3
 
-  
+
     }).then(() => {
       mainWindow.send('updatedAppointments')
       addAppointmentWin.close()
       console.log('updatedAppointments is sent !')
     });
-  
+
   })
 
   ////////////////////////////////// updatePatient /////////////////////////////////////
-  var patientId2 ;
+  var patientId2;
   let updatePatientWin
-  ipc.on('updatePatientPage', (event,arg) => {
+  ipc.on('updatePatientPage', (event, arg) => {
     console.log(arg)
     patientId2 = arg['id']
     if (!updatePatientWin) {
@@ -92,13 +92,13 @@ function main() {
     // for synchronization  
     event.returnValue = patientId2
   })
-  ipc.on('getPatientById', (event, arg)=>{
-    Patient.findOne({where: { id: patientId2 },raw : true}).then(patien => {
+  ipc.on('getPatientById', (event, arg) => {
+    Patient.findOne({ where: { id: patientId2 }, raw: true }).then(patien => {
 
       event.returnValue = patien;
     }).catch((err) => console.log(err))
   })
-  ipc.on('updatePatient', (event, arg)=>{
+  ipc.on('updatePatient', (event, arg) => {
     firstName = arg['firstName']
     lastName = arg['lastName']
     dateOfBirth = arg['dateOfBirth']
@@ -123,7 +123,7 @@ function main() {
           }).then(() => {
             mainWindow.send('updatedPatients')
             updatePatientWin.close()
-            event.returnValue = 'update successfully' 
+            event.returnValue = 'update successfully'
           })
           .catch((err) => event.returnValue = 'error')
       }
@@ -136,15 +136,15 @@ function main() {
   ////////////////////////////////// getPatientAppointments /////////////////////////////////////
 
 
-  var patientId1 ;
+  var patientId1;
   let getPatientAppointmentWin
-  ipc.on('getPatientAppointmentsPage', (event,arg) => {
+  ipc.on('getPatientAppointmentsPage', (event, arg) => {
     console.log(arg)
     patientId1 = arg['id']
     if (!getPatientAppointmentWin) {
       getPatientAppointmentWin = new Window({
-        file: path.join('views', 'patientAppointments.html'),
-        width: 1000,
+        file: path.join('views', 'patient.html'),
+        width: 1200,
         height: 700,
         parent: mainWindow
       })
@@ -157,13 +157,13 @@ function main() {
     event.returnValue = patientId1
   })
 
-  ipc.on('getPatientAppointments', (event, arg)=>{
-    Appointment.findAll({ where: { patientId: patientId1 }, raw : true ,      
+  ipc.on('getPatientAppointments', (event, arg) => {
+    Appointment.findAll({
+      where: { patientId: patientId1 }, raw: true,
       include: [{
-      model: Patient
-    }]
-  }).then(appointments => {
-      console.log(appointments)
+        model: Patient
+      }]
+    }).then(appointments => {
       event.returnValue = appointments;
     }).catch((err) => console.log(err))
   })
@@ -188,24 +188,24 @@ function main() {
     }
   })
 
-  ipc.on('addPatient', (event, arg)=>{
+  ipc.on('addPatient', (event, arg) => {
     firstName = arg['firstName']
     lastName = arg['lastName']
     dateOfBirth = arg['dateOfBirth']
     gender = arg['gender']
-  
+
     Patient.create({
       firstName: firstName,
       lastName: lastName,
       dateOfBirth: dateOfBirth,
       gender: gender
-  
+
     }).then(() => {
       mainWindow.send('updatedPatients')
       addPatientWin.close()
       console.log('updatedPatients is sent !')
     });
-  
+
   })
 
 }
