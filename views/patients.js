@@ -15,8 +15,8 @@ function loadPatients(){
                             </a>
                             <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.gender}</p>
                             <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.dateOfBirth.split(' ')[0]}</p>
-                            <button type="button" class="btn btn-xs btn-outline-primary ">Voir les rendez-vous</button>
-                            <button type="button" class="btn btn-xs btn-outline-secondary">Modifier</button>
+                            <button type="button" class="btn btn-xs btn-outline-primary" onClick="getPatientAppointments(${p.id})">Voir les rendez-vous</button>
+                            <button type="button" class="btn btn-xs btn-outline-secondary" onClick="updatePatient(${p.id})">Modifier</button>
                             <button type="button" class="btn btn-xs btn-outline-danger" onClick="deletePatient(${p.id})">Supprimer</button>
                         </div>
                         
@@ -34,6 +34,21 @@ function deletePatient(id){
     loadPatients()
 }
 
+function getPatientAppointments(id){
+    data = {
+        'id': id,
+    }
+    const patientId = ipc.sendSync('getPatientAppointmentsPage',data)
+    
+}
+function updatePatient(id){
+    data = {
+        'id': id,
+    }
+    const patientId = ipc.sendSync('updatePatientPage',data)
+    
+}
+
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('addPatient').addEventListener('click',()=>{
         ipc.send('createPatient')
@@ -46,4 +61,4 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 });
     
-module.exports = { loadPatients }
+module.exports = { loadPatients ,}

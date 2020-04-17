@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dore jQuery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="font/iconsmind/style.css" />
+    <link rel="stylesheet" href="font/simple-line-icons/css/simple-line-icons.css" />
+
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/fullcalendar.min.css" />
+    <link rel="stylesheet" href="css/vendor/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="css/vendor/datatables.responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" href="css/vendor/select2.min.css" />
+    <link rel="stylesheet" href="css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="css/vendor/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-stars.css" />
+    <link rel="stylesheet" href="css/vendor/nouislider.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body id="app-container" class="menu-default show-spinner">
+
+    <main>
+        <div class="container-fluid">
+            <div class="row  ">
+                <div class="col-12">
+
+                    <h1>Tableau de bord</h1>
+
+                    <div class="separator mb-5"></div>
+
+
+                </div>
+
+                <div class="col-xl-6 col-lg-12 mb-4">
+                    <div class="card">
+                        <div class="position-absolute card-top-buttons">
+                            <button class="btn btn-header-light icon-button">
+                                <i class="simple-icon-refresh"></i>
+                            </button>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Rendez-vous d'aujourd'hui</h5>
+                            <div class="scroll dashboard-list-with-thumbs" id="patientAppointments">
+                                <div class="d-flex flex-row mb-3">
+                                    <a class="d-block position-relative" href="#">
+                                        <img src="img/People-Patient-Female-icon.png" alt="Marble Cake"
+                                            class="list-thumbnail border-0" />
+                                        <span
+                                            class="badge badge-pill badge-theme-2 position-absolute badge-top-right">NEW</span>
+                                    </a>
+                                    <div class="pl-3 pt-2 pr-2 pb-2">
+                                        <a href="#">
+                                            <p class="list-item-heading">Marble Cake</p>
+                                            <div class="pr-4 d-none d-sm-block">
+                                                <p class="text-muted mb-1 text-small">Latashia Nagy - 100-148 Warwick
+                                                    Trfy, Kansas City, USA</p>
+                                            </div>
+                                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                                09.04.2018</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row mb-3">
+                                    <a class="d-block position-relative" href="#">
+                                        <img src="img/fruitcake-thumb.jpg" alt="Fruitcake"
+                                            class="list-thumbnail border-0" />
+                                        <span
+                                            class="badge badge-pill badge-theme-2 position-absolute badge-top-right">NEW</span>
+                                    </a>
+                                    <div class="pl-3 pt-2 pr-2 pb-2">
+                                        <a href="#">
+                                            <p class="list-item-heading">Fruitcake</p>
+                                            <div class="pr-4 d-none d-sm-block">
+                                                <p class="text-muted mb-1 text-small">Marty Otte - 166-156 Rue de
+                                                    Varennes, Gatineau, QC J8T 8G4, Canada</p>
+                                            </div>
+                                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                                09.04.2018</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row mb-3">
+                                    <a class="d-block position-relative" href="#">
+                                        <img src="img/chocolate-cake-thumb.jpg" alt="Chocolate Cake"
+                                            class="list-thumbnail border-0" />
+                                        <span
+                                            class="badge badge-pill badge-theme-1 position-absolute badge-top-right">PROCESS</span>
+                                    </a>
+                                    <div class="pl-3 pt-2 pr-2 pb-2">
+                                        <a href="#">
+                                            <p class="list-item-heading">Chocolate Cake</p>
+                                            <div class="pr-4 d-none d-sm-block">
+                                                <p class="text-muted mb-1 text-small">Linn Ronning - Rasen 2-14, 98547
+                                                    Kühndorf, Germany</p>
+                                            </div>
+                                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                                09.04.2018</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row mb-3">
+                                    <a class="d-block position-relative" href="#">
+                                        <img src="img/fat-rascal-thumb.jpg" alt="Fat Rascal"
+                                            class="list-thumbnail border-0" />
+                                        <span
+                                            class="badge badge-pill badge-theme-3 position-absolute badge-top-right">DONE</span>
+                                    </a>
+                                    <div class="pl-3 pt-2 pr-2 pb-2">
+                                        <a href="#">
+                                            <p class="list-item-heading">Fat Rascal</p>
+                                            <div class="pr-4 d-none d-sm-block">
+                                                <p class="text-muted mb-1 text-small">Rasheeda Vaquera - 37 Rue des
+                                                    Grands Prés, 03100 Montluçon, France</p>
+                                            </div>
+                                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                                09.04.2018</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row mb-3">
+                                    <a class="d-block position-relative" href="#">
+                                        <img src="img/streuselkuchen-thumb.jpg" alt="Streuselkuchen"
+                                            class="list-thumbnail border-0" />
+                                        <span
+                                            class="badge badge-pill badge-theme-3 position-absolute badge-top-right">DONE</span>
+                                    </a>
+                                    <div class="pl-3 pt-2 pr-2 pb-2">
+                                        <a href="#">
+                                            <p class="list-item-heading">Streuselkuchen</p>
+                                            <div class="pr-4 d-none d-sm-block">
+                                                <p class="text-muted mb-1 text-small">Mimi Carreira - 36-71 Victoria
+                                                    St, Birmingham, UK</p>
+                                            </div>
+                                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                                09.04.2018</div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row mb-3">
+                                    <a class="d-block position-relative" href="#">
+                                        <img src="img/cremeschnitte-thumb.jpg" alt="Cremeschnitte"
+                                            class="list-thumbnail border-0" />
+                                        <span
+                                            class="badge badge-pill badge-theme-3 position-absolute badge-top-right">DONE</span>
+                                    </a>
+                                    <div class="pl-3 pt-2 pr-2 pb-2">
+                                        <a href="#">
+                                            <p class="list-item-heading">Cremeschnitte</p>
+                                            <div class="pr-4 d-none d-sm-block">
+                                                <p class="text-muted mb-1 text-small">Lenna Majeed - 6 Hertford St
+                                                    Mayfair, London, UK</p>
+                                            </div>
+                                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                                09.04.2018</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    
+
+
+    <!-- <script src="./js/vendor/jquery-3.3.1.min.js"></script> -->
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="./js/vendor/Chart.bundle.min.js"></script>
+    <script src="./js/vendor/chartjs-plugin-datalabels.js"></script>
+    <script src="./js/vendor/moment.min.js"></script>
+    <script src="./js/vendor/fullcalendar.min.js"></script>
+    <script src="./js/vendor/datatables.min.js"></script>
+    <script src="./js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="./js/vendor/owl.carousel.min.js"></script>
+    <script src="./js/vendor/progressbar.min.js"></script>
+    <script src="./js/vendor/jquery.barrating.min.js"></script>
+    <script src="./js/vendor/select2.full.js"></script>
+    <script src="./js/vendor/nouislider.min.js"></script>
+    <script src="./js/vendor/bootstrap-datepicker.js"></script>
+    <script src="./js/vendor/Sortable.js"></script>
+    <script src="./js/vendor/mousetrap.min.js"></script>
+    <script src="./js/dore.script.js"></script>
+    <script src="./js/scripts.js"></script>
+    <script src="./getPatientAppointments.js"></script>
+</body>
+
+</html>

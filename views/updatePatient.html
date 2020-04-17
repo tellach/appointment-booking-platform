@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter Patient</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="font/iconsmind/style.css" />
+    <link rel="stylesheet" href="font/simple-line-icons/css/simple-line-icons.css" />
+
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/fullcalendar.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-float-label.min.css" />
+    <link rel="stylesheet" href="css/vendor/select2.min.css" />
+    <link rel="stylesheet" href="css/vendor/select2-bootstrap.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" href="css/vendor/dropzone.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="css/vendor/component-custom-switch.min.css" />
+    <link rel="stylesheet" href="css/vendor/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="css/vendor/nouislider.min.css" />
+    <link rel="stylesheet" href="css/vendor/bootstrap-stars.css" />
+    <link rel="stylesheet" href="css/vendor/cropper.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="card my-4">
+            <div class="card-body">
+                <h5 class="mb-4">Modifier un patient</h5>
+
+                <form>
+
+                    <label class="form-group has-float-label my-5">
+                        <input class="form-control" name="lastName">
+                        <span>Nom</span>
+                    </label>
+
+                    <label class="form-group has-float-label my-5">
+                        <input class="form-control" name="firstName">
+                        <span>Prénom</span>
+                    </label>
+
+                    <label class="form-group has-float-label my-5">
+                        <input class="form-control datepicker" placeholder="" name="dateOfBirth">
+                        <span>Date de naissence</span>
+                    </label>
+
+                    <label class="form-group has-float-label my-5">
+                        <select class="form-control select2-single" name="gender">
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
+                        <span>Sex</span>
+                    </label>
+
+                    <button class="btn btn-primary" type="submit">Modifier</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>window.$ = window.jQuery = require('jquery');</script>
+<script src="js/vendor/bootstrap.bundle.min.js"></script>
+<script src="js/vendor/moment.min.js"></script>
+<script src="js/vendor/fullcalendar.min.js"></script>
+<script src="js/vendor/perfect-scrollbar.min.js"></script>
+<script src="js/vendor/bootstrap-notify.min.js"></script>
+<script src="js/vendor/select2.full.js"></script>
+<script src="js/vendor/bootstrap-datepicker.js"></script>
+<script src="js/vendor/dropzone.min.js"></script>
+<script src="js/vendor/bootstrap-tagsinput.min.js"></script>
+<script src="js/vendor/nouislider.min.js"></script>
+<script src="js/vendor/jquery.barrating.min.js"></script>
+<script src="js/vendor/cropper.min.js"></script>
+<script src="js/vendor/typeahead.bundle.js"></script>
+<script src="js/vendor/mousetrap.min.js"></script>
+<script src="js/dore.script.js"></script>
+<script src="js/scripts.js"></script>
+<script src="./addPatient.js"></script>
+</html>

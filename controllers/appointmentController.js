@@ -66,9 +66,9 @@ function updateAppointmentDate(event, arg) {
 function addAppointment(event, arg) {
   var today = new Date();
 
-  title = "rdv6"
+  title = "rdv1"
   date = new Date(today.getFullYear(),today.getMonth(),today.getDate(),10,0,0,1)
-  patientId = 1
+  patientId = 10
   Patient.findOne({ where: { id: patientId } }).then((patientFound) => {
     if (patientFound) {
       Appointment.create({

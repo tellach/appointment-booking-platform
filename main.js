@@ -29,6 +29,59 @@ function main() {
   mainWindow.maximize()
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
+  var patientId2 ;
+  let updatePatientWin
+  ipc.on('updatePatientPage', (event,arg) => {
+    console.log(arg)
+    patientId2 = arg['id']
+    if (!updatePatientWin) {
+      updatePatientWin = new Window({
+        file: path.join('views', 'updatePatient.html'),
+        width: 500,
+        height: 700,
+        parent: mainWindow
+      })
+
+      updatePatientWin.on('close', () => {
+        updatePatientWin = null
+      })
+    }
+    // for synchronization  
+    event.returnValue = patientId2
+  })
+
+  var patientId1 ;
+  let getPatientAppointmentWin
+  ipc.on('getPatientAppointmentsPage', (event,arg) => {
+    console.log(arg)
+    patientId1 = arg['id']
+    if (!getPatientAppointmentWin) {
+      getPatientAppointmentWin = new Window({
+        file: path.join('views', 'patientAppointments.html'),
+        width: 1000,
+        height: 700,
+        parent: mainWindow
+      })
+
+      getPatientAppointmentWin.on('close', () => {
+        getPatientAppointmentWin = null
+      })
+    }
+    // for synchronization  
+    event.returnValue = patientId1
+  })
+
+  ipc.on('getPatientAppointments', (event, arg)=>{
+    Appointment.findAll({ where: { patientId: patientId1 }, raw : true ,      
+      include: [{
+      model: Patient
+    }]
+  }).then(appointments => {
+      console.log(appointments)
+      event.returnValue = appointments;
+    }).catch((err) => console.log(err))
+  })
+
 
   let addPatientWin
   ipc.on('createPatient', () => {
@@ -67,6 +120,8 @@ function main() {
   })
 
 }
+
+
 
 ipc.on('getPatients', getPatients)
 ipc.on('getAppointments', getAppointments)
