@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const electron = require("electron");
+const { Op } = require("sequelize");
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const { getPatients, addPatient, deletePatient } = require('./controllers/patientController')
@@ -62,7 +63,16 @@ function main() {
 
   ipc.on('getAppointmentsByDate', (event, arg)=>{
     date = arg['date']
-    Appointment.findAll({where: { date: date },raw : true,
+    date = arg['date'].split('/')
+    date = date.map(e => parseInt(e))
+
+    let startDate = new Date(date[2],date[0] - 1,date[1],0,0,0)
+    var endDate = new Date(date[2],date[0] - 1,date[1],0,0,0)
+    // Add a day
+    endDate.setDate(startDate.getDate() + 1) 
+
+    console.log('Start date :::::'+startDate+'||||||| End date:::::::::'+endDate)
+    Appointment.findAll({where: { date: {[Op.between]: [startDate, endDate], } },raw : true,
       include: [{
       model: Patient
     }]
