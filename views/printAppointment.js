@@ -1,12 +1,10 @@
+var delayInMilliseconds = 1000; //1 second
 
-const printPdfButton = document.getElementById('print-pdf')
+document.addEventListener("DOMContentLoaded", function(){
+    setTimeout(function() {
+        ipc.send('print-to-pdf',event)
+      }, delayInMilliseconds);
+});
 
-printPdfButton.addEventListener('click',function(event) {
-    
-     ipc.send('print-to-pdf',event)
-    
 
-})
-ipc.on('wrote-pdf',function(event,path){
-    console.log(path)
-})
+  

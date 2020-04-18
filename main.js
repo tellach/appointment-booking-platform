@@ -62,6 +62,7 @@ function main() {
 
   ipc.on('getAppointmentsByDate', (event, arg)=>{
     date = arg['date']
+    console.log(date)
     Appointment.findAll({where: { date: date },raw : true,
       include: [{
       model: Patient
@@ -79,7 +80,6 @@ function main() {
   var patientId3;
   let addAppointmentWin
   ipc.on('addAppointmentPage', (event, arg) => {
-    console.log(arg)
     patientId3 = arg['id']
     if (!addAppointmentWin) {
       addAppointmentWin = new Window({
@@ -307,6 +307,7 @@ function main() {
     }
   })
 
+
   ipc.on('addPatient', (event, arg) => {
     firstName = arg['firstName']
     lastName = arg['lastName']
@@ -326,9 +327,33 @@ function main() {
 
   })
     ////////////////////////////////////////printAppointment//////////////////////////////////////////
+    let appointmentWin
+    ipc.on('imprimerPage', (event, arg) => {
+      appointmentId = arg['id']
+      if (!appointmentWin) {
+        appointmentWin = new Window({
+
+          file: path.join('views', 'appointment.html'),
+          show:false,
+          width: 500,
+          height: 600,
+          parent: mainWindow
+        })
+  
+        appointmentWin.on('close', () => {
+          appointmentWin = null
+        })
+      }
+      // for synchronization  
+      event.returnValue = appointmentId;
+    })
+
+    var delayInMilliseconds = 1000; //1 second
+
+
     ipc.on('print-to-pdf', function (event) {
-      getPatientAppointmentWin.webContents.print({printBackground: true, landscape: true}, function (error, data) {
-       
+      appointmentWin.webContents.print({printBackground: true, landscape: true}, function (error, data) {
+       if (error) appointmentWin.close()
       })
     })
 

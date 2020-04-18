@@ -47,6 +47,4 @@ document.addEventListener("DOMContentLoaded", function(){
     getPatientAppointment()
 });
 
-function printPdf(){
-    ipc.send('print-to-pdf');
-}
+
