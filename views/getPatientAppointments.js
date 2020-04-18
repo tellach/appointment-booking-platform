@@ -15,7 +15,7 @@ function getPatientAppointments(id){
                 <div class="text-center">
                     <img alt="Profile" src="img/People-Patient-Male-icon.png" class="img-thumbnail border-0 rounded-circle mb-4 list-thumbnail">
                     <p class="list-item-heading mb-1">${app['patient.lastName']+' '+app['patient.firstName']}</p>
-                    <p class="mb-4 text-muted text-small">Né le ${app['patient.dateOfBirth']}</p>
+                    <p class="mb-4 text-muted text-small">Né le ${app['patient.dateOfBirth'].split(' ')[0]}</p>
                 </div>
             </div>
         </div>
@@ -49,6 +49,9 @@ function getPatientAppointments(id){
 
 document.addEventListener("DOMContentLoaded", function(){
     getPatientAppointments()
+    ipc.on('updatedAppointments',()=>{
+        getPatientAppointments()
+    })
 });
 
 function deleteAppoitment(id){
@@ -61,8 +64,7 @@ function updateAppoitment(id){
     data = {
         'id': id,
     }
-    const patientId = ipc.sendSync('updateAppoitmentPage',data)
-    
+    ipc.sendSync('updateAppoitmentPage',data)
 }
 
     

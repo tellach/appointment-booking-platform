@@ -71,11 +71,15 @@ function main() {
 
   ipc.on('addAppointment', (event, arg) => {
     title = arg['title']
-    date = arg['date']
-
+    date = arg['date'].split('/')
+    time = arg['time'].split(':')
+    date = date.map(e => parseInt(e))
+    time = time.map(e => parseInt(e))
+    datetime = new Date(date[2],date[0] - 1,date[1],time[0] - 1,time[1],0)
+    console.log(datetime)
     Appointment.create({
       title: title,
-      date: date,
+      date: datetime,
       patientId: patientId3
 
 
@@ -113,8 +117,8 @@ function main() {
   var AppoitmentId2
   let updateAppoitmentWin
   ipc.on('updateAppoitmentPage', (event, arg) => {
-    console.log(arg)
-    patientId2 = arg['id']
+    console.log('updateAppoitmentPage recieved with '+arg)
+    AppoitmentId2 = arg['id']
     if (!updateAppoitmentWin) {
       updateAppoitmentWin = new Window({
         file: path.join('views', 'updateAppoitment.html'),
@@ -185,25 +189,29 @@ function main() {
 
   ipc.on('updateAppointment', (event, arg) => {
     title = arg['title']
-    date = arg['date']
-    
+    date = arg['date'].split('/')
+    time = arg['time'].split(':')
+    date = date.map(e => parseInt(e))
+    time = time.map(e => parseInt(e))
+    datetime = new Date(date[2],date[0] - 1,date[1],time[0] - 1,time[1],0)
+
     Appointment.findOne({
       where: {
-        id: AppoitmentId2 // deletes all pugs whose age is 7
+        id: AppoitmentId2 
       }
     }).then((appfound) => {
       if (appfound) {
         Appointment.update(
           {
             title: title,
-            date: date,
+            date: datetime,
           },
           {
             where: {
               id: AppoitmentId2
             }
           }).then(() => {
-            getPatientAppointmentWin.send('updatedAppPatient')
+            getPatientAppointmentWin.send('updatedAppointments')
             updateAppoitmentWin.close()
             event.returnValue = 'update successfully'
           })
@@ -286,7 +294,6 @@ function main() {
     }).then(() => {
       mainWindow.send('updatedPatients')
       addPatientWin.close()
-      console.log('updatedPatients is sent !')
     });
 
   })
@@ -298,7 +305,6 @@ function main() {
 ipc.on('getPatients', getPatients)
 ipc.on('getAppointments', getAppointments)
 
-ipc.on('addAppointment', addAppointment)
 ipc.on('getAppointmentsByPatient', getAppointmentsByPatient)
 ipc.on('getCurrentDayAppointments', getCurrentDayAppointments)
 ipc.on('deleteAppointment', deleteAppointment)

@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="css/vendor/nouislider.min.css" />
     <link rel="stylesheet" href="css/vendor/bootstrap-stars.css" />
     <link rel="stylesheet" href="css/vendor/cropper.min.css" />
+    <link rel="stylesheet" href="./../node_modules/jquery-timepicker/jquery.timepicker.css">
+
     <link rel="stylesheet" href="css/main.css" />
 </head>
 
@@ -41,6 +43,11 @@
                     <label class="form-group has-float-label my-5">
                         <input class="form-control datepicker" placeholder="" name="date" id="date">
                         <span>Date</span>
+                    </label>
+
+                    <label class="form-group has-float-label my-5">
+                        <input class="form-control timepicker" placeholder="" id="time"  name="time">
+                        <span>Heure du rendez-vous</span>
                     </label>
 
                     <button class="btn btn-primary" type="submit">Modifier</button>
@@ -66,5 +73,6 @@
 <script src="js/vendor/mousetrap.min.js"></script>
 <script src="js/dore.script.js"></script>
 <script src="js/scripts.js"></script>
+<script src="./../node_modules/jquery-timepicker/jquery.timepicker.js"></script>
 <script src="./updateAppoitment.js"></script>
 </html>
