@@ -29,6 +29,24 @@ function main() {
   mainWindow.maximize()
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
+   ////////////////////////////////// getPatientAppointment /////////////////////////////////////
+   var appointmentId;
+
+   ipc.on('getAppoitmentPatientPage', (event,arg) =>{
+     appointmentId = arg['id']
+     event.returnValue = appointmentId;
+
+   })
+  
+   ipc.on('getPatientAppointment1', (event,arg) =>{
+     Appointment.findOne({ where: { id: appointmentId }, raw : true,      
+       include: [{
+       model: Patient
+     }]
+    }).then(appointment => {
+       event.returnValue = appointment;
+     }).catch((err) => console.log(err))
+   })
 
   ////////////////////////////////// getAppointmentsByDate /////////////////////////////////////
 

@@ -31,6 +31,7 @@ function getPatientAppointments(id){
                             ${app.title}
                         </a>
                         <p class="mb-1 text-muted text-small w-30 w-xs-100">${app.date.split(' ')[0] + ' ' +app.date.split(' ')[1].split('.')[0]}</p>
+                        <button type="button" class="btn btn-xs btn-outline-secondary" onClick="getAppoitmentById(${app.id})" >Afficher</button>
                         <button type="button" class="btn btn-xs btn-outline-secondary" onClick="updateAppoitment(${app.id})" >Modifier</button>
                         <button type="button" class="btn btn-xs btn-outline-danger" onClick="deleteAppoitment(${app.id})" >Supprimer</button>
                     </div>
@@ -66,6 +67,15 @@ function updateAppoitment(id){
     }
     ipc.sendSync('updateAppoitmentPage',data)
 }
+function getAppoitmentById(id){
+    data = {
+        'id': id,
+    }
+    const patientId = ipc.sendSync('getAppoitmentPatientPage',data)
+    window.location='./appointment.html'
+    
+}
+
 
     
 module.exports = { getPatientAppointments }
