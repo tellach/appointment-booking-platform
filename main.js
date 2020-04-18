@@ -9,22 +9,16 @@ const ipc = electron.ipcMain;
 const dialog = require('electron').dialog;
 const { Patient, Appointment } = require('./config')
 
+const url = require('url')
+const fs = require('fs')
+const os = require('os')
+
 
 
 
 app.allowRendererProcessReuse = false;
 
 
-function pdfSettings() {
-  var paperSizeArray = ["A4", "A5"];
-  var option = {
-      landscape: false,
-      marginsType: 0,
-      printBackground: false,
-      printSelectionOnly: false,
-  };
-return option;
-}
 
 function main() {
   // Create the browser window.
@@ -271,7 +265,7 @@ function main() {
         file: path.join('views', 'patient.html'),
         width: 1200,
         height: 700,
-        parent: mainWindow
+        //parent: mainWindow
       })
 
       getPatientAppointmentWin.on('close', () => {
@@ -333,9 +327,10 @@ function main() {
   })
     ////////////////////////////////////////printAppointment//////////////////////////////////////////
     ipc.on('print-to-pdf', function (event) {
-      const pdfPath = path.join(__dirname, 'print.pdf')
-      const win = BrowserWindow.fromWebContents(event.sender)
-      win.webContents.printToPDF({printBackground: true, landscape: true}, function (error, data) {
+      const pdfPath = path.join(os.tmpdir(), 'print.pdf')
+      //const win = BrowserWindow.fromWebContents(event.sender)
+      //const win = getPatientAppointmentWin
+      getPatientAppointmentWin.webContents.print({printBackground: true, landscape: true}, function (error, data) {
         if (error) throw error
         fs.writeFile(pdfPath, data, function (error) {
           if (error) {
