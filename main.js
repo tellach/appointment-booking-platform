@@ -108,12 +108,46 @@ function main() {
     // for synchronization  
     event.returnValue = patientId2
   })
+
+  ////////////////////////////////// updatePatient /////////////////////////////////////
+  var AppoitmentId2
+  let updateAppoitmentWin
+  ipc.on('updateAppoitmentPage', (event, arg) => {
+    console.log(arg)
+    patientId2 = arg['id']
+    if (!updateAppoitmentWin) {
+      updateAppoitmentWin = new Window({
+        file: path.join('views', 'updateAppoitment.html'),
+        width: 500,
+        height: 700,
+        parent: mainWindow
+      })
+
+      updateAppoitmentWin.on('close', () => {
+        updateAppoitmentWin = null
+      })
+    }
+    // for synchronization  
+    event.returnValue = AppoitmentId2
+  })
+
+
+
   ipc.on('getPatientById', (event, arg) => {
     Patient.findOne({ where: { id: patientId2 }, raw: true }).then(patien => {
 
       event.returnValue = patien;
     }).catch((err) => console.log(err))
   })
+
+  ipc.on('getAppointmentById', (event, arg) => {
+    Appointment.findOne({ where: { id: AppoitmentId2 }, raw: true }).then(app => {
+
+      event.returnValue = app;
+    }).catch((err) => console.log(err))
+  })
+
+
   ipc.on('updatePatient', (event, arg) => {
     firstName = arg['firstName']
     lastName = arg['lastName']
@@ -148,6 +182,39 @@ function main() {
       }
     })
   })
+
+  ipc.on('updateAppointment', (event, arg) => {
+    title = arg['title']
+    date = arg['date']
+    
+    Appointment.findOne({
+      where: {
+        id: AppoitmentId2 // deletes all pugs whose age is 7
+      }
+    }).then((appfound) => {
+      if (appfound) {
+        Appointment.update(
+          {
+            title: title,
+            date: date,
+          },
+          {
+            where: {
+              id: AppoitmentId2
+            }
+          }).then(() => {
+            getPatientAppointmentWin.send('updatedAppPatient')
+            updateAppoitmentWin.close()
+            event.returnValue = 'update successfully'
+          })
+          .catch((err) => event.returnValue = 'error')
+      }
+      else {
+        event.returnValue = 'Appointment not found'
+      }
+    })
+  })
+  
 
   ////////////////////////////////// getPatientAppointments /////////////////////////////////////
 

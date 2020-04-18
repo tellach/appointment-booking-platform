@@ -85,9 +85,8 @@ function addAppointment(event, arg) {
   })
 }
 
-function deleteAppointment(event, arg) {
-
-  appointmentId = 25
+function deleteAppointment(event, appointmentId) {
+  console.log('deleteAppointment rec !')
   Appointment.destroy(
     {
       where: {
