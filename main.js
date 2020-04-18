@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const electron = require("electron");
+const { Op } = require("sequelize");
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const { getPatients, addPatient, deletePatient } = require('./controllers/patientController')
