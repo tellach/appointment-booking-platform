@@ -29,8 +29,6 @@ function getPatientAppointment(){
                     ${app.title}
                 </a>
                 <p class="mb-1 text-muted text-small w-30 w-xs-100">${app.date.split(' ')[0] + ' ' +app.date.split(' ')[1].split('.')[0]}</p>
-                <button type="button" class="btn btn-xs btn-outline-secondary" onClick="printPdf()" >Imprimer</button>
-
             </div>
         </div>
     </div>
@@ -48,3 +46,7 @@ function getPatientAppointment(){
 document.addEventListener("DOMContentLoaded", function(){
     getPatientAppointment()
 });
+
+function printPdf(){
+    ipc.send('print-to-pdf');
+}

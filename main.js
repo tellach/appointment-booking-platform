@@ -14,6 +14,18 @@ const { Patient, Appointment } = require('./config')
 
 app.allowRendererProcessReuse = false;
 
+
+function pdfSettings() {
+  var paperSizeArray = ["A4", "A5"];
+  var option = {
+      landscape: false,
+      marginsType: 0,
+      printBackground: false,
+      printSelectionOnly: false,
+  };
+return option;
+}
+
 function main() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -29,6 +41,10 @@ function main() {
   mainWindow.maximize()
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
+
+
+
+
    ////////////////////////////////// getPatientAppointment /////////////////////////////////////
    var appointmentId;
 
@@ -315,6 +331,21 @@ function main() {
     });
 
   })
+    ////////////////////////////////////////printAppointment//////////////////////////////////////////
+    ipc.on('print-to-pdf', function (event) {
+      const pdfPath = path.join(__dirname, 'print.pdf')
+      const win = BrowserWindow.fromWebContents(event.sender)
+      win.webContents.printToPDF({printBackground: true, landscape: true}, function (error, data) {
+        if (error) throw error
+        fs.writeFile(pdfPath, data, function (error) {
+          if (error) {
+            throw error
+          }
+          shell.openExternal('file://' + pdfPath)
+          event.sender.send('wrote-pdf', pdfPath)
+        })
+      })
+    })
 
 }
 
