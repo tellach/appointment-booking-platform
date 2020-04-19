@@ -3,7 +3,8 @@ const ipc = require('electron').ipcRenderer;
 function loadAppointment(){
     const rdv = ipc.sendSync('getAppointmentById')
     document.getElementById('title').value = rdv.title
-    document.getElementById('date').value = rdv.date.split(' ')[0]
+    d = rdv.date.split(' ')[0].split('-')
+    document.getElementById('date').value = d[1]+'/'+d[2]+'/'+d[0]
     document.getElementById('time').value = rdv.date.split(' ')[1].split(':').slice(0,2).join(':')
     return rdv.date.split(' ')[1]
 }

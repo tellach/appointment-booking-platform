@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Liste des patients</title>
+    <title>Imprimer un rendez-vous</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="font/iconsmind/style.css" />
@@ -20,46 +20,45 @@
     <link rel="stylesheet" href="css/vendor/nouislider.min.css" />
     <link rel="stylesheet" href="css/vendor/bootstrap-datepicker3.min.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <style>
+        p{
+            font-size: 1.5rem !important ;
+        }
+        h3{
+            font-size: 1.75rem !important;
+        }
+        h1{
+            font-size: 2rem !important;
+        }
+    </style>
 </head>
 
-<body id="app-container" class="menu-default show-spinner">
-    <main style="margin-left: 50px;margin-top: 40px;">
-        <div class="container-fluid disable-text-selection">
-            <div class="row">
-                <div class="col-12">
-                    <div class="mb-3 justify-content-between">
-                        <h1>Profil du patient</h1>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-12 mb-4" id="profile">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img alt="Profile" src="img/People-Patient-Male-icon.png" class="img-thumbnail border-0 rounded-circle mb-4 list-thumbnail">
-                                        <p class="list-item-heading mb-1">Namani Adel</p>
-                                        <p class="mb-4 text-muted text-small">Né le 11-01-1999</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 col-12 mb-4">
-                            <h2 class="mb-3 ml-3">Liste des rendez-vous</h2>
-                            <button type="button" class="btn btn-xs btn-outline-secondary" id="print-pdf" >Imprimer</button>
-
-                            <div class="col-12 scroll list dashboard-list-with-thumbs" id="patientAppointments">
-                                
-                            </div>
-                        </div>                     
-                    </div>
-                    
-
-                    <div class="separator mb-5"></div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-
+<body id="app-container" class="menu-default show-spinner" style="padding: 50px;">
+    <p style="
+    position: relative;
+    left: 45%;
+"> <img src="./img/logo-black.png" style="
+    height: 100%;
+    width: 135px;
+       "></p>
+    <h1 style="position: relative; left: 40%;">Rendez-vous</h1>
+    <hr>
+    <h3 style="margin-bottom: 25px;">Information du patient:</h3>
+    <p><b>Nom du patient:</b> <span id="nom">NAMANI</span></p>
+    <p><b>Prénom du patient:</b> <span id="prenom">Adel Abderahmane</span></p>
+    <p><b>Date de naissence:</b> <span id="ddn">11-01-1999</span></p>
+    <p><b>Sex:</b> Homme</p>
+    <hr>
+    <h3 style="margin-bottom: 25px;">Information du rendez-vous:</h3>
+    <p><b>Date du rendez-vous:</b> <span id="drdv">12-04-2020</span></p>
+    <p><b>Heure du rendez-vous:</b> <span id="hrdv">10:15</span></p>
+    <p><b>Titre du rendez-vous:</b> <span id="trdv">Consultation</span></p>
+    <hr style="margin-bottom: 200px;">
+    <div style="position: relative; left: 80%;">
+        <p><b>Médecin:</b> <span id="nom"> NAMANI Adel</span></p>
+        <p><b>Cabinet:</b> <span id="prenom"> Bordj El Bahri</span></p>
+        <p><b>Imprimé le:</b> <span id="drdv"> 12-04-2020</span></p>
+    </div>  
     <!-- <script src="./js/vendor/jquery-3.3.1.min.js"></script> -->
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -80,8 +79,8 @@
     <script src="./js/vendor/mousetrap.min.js"></script>
     <script src="./js/dore.script.js"></script>
     <script src="./js/scripts.js"></script>
-    <script src="./appointment.js"></script>
-    <script src="./printAppointment.js"></script>
+    <script src="./controllers/appointment.js"></script>
+    <script src="./controllers/printAppointment.js"></script>
 
 
 </body>

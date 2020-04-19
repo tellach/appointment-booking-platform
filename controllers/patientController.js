@@ -1,7 +1,7 @@
 const { Patient } = require('./../config')
 
 function getPatients(event, arg) {
-  Patient.findAll({raw : true}).then(patiens => {
+  Patient.findAll({ raw: true }).then(patiens => {
 
     event.returnValue = patiens;
   }).catch((err) => console.log(err))
@@ -39,4 +39,4 @@ function deletePatient(event, patientId) {
 }
 
 
-module.exports = { getPatients,addPatient, deletePatient }
+module.exports = { getPatients, addPatient, deletePatient }

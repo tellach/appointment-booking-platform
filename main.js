@@ -3,16 +3,18 @@ const electron = require("electron");
 const { Op } = require("sequelize");
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
-const { getPatients, addPatient, deletePatient } = require('./controllers/patientController')
-const { getAppointments, addAppointment, getAppointmentsByPatient, getCurrentDayAppointments, deleteAppointment, updateAppointmentDate } = require('./controllers/appointmentController')
-const Window = require('./helpers/Window')
-const ipc = electron.ipcMain;
-const dialog = require('electron').dialog;
-const { Patient, Appointment } = require('./config')
-
 const url = require('url')
 const fs = require('fs')
 const os = require('os')
+const ipc = electron.ipcMain;
+const dialog = require('electron').dialog;
+
+const { getPatients, addPatient, deletePatient } = require('./controllers/patientController')
+const { getAppointments, addAppointment, getAppointmentsByPatient, getCurrentDayAppointments, deleteAppointment, updateAppointmentDate } = require('./controllers/appointmentController')
+const Window = require('./helpers/Window')
+const { Patient, Appointment } = require('./config')
+
+
 
 
 
@@ -30,52 +32,47 @@ function main() {
       nodeIntegration: true
     }
   })
-
-  // and load the index.html of the app.
   mainWindow.loadFile(path.join('views', 'index.html'))
   mainWindow.maximize()
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
 
+  // Defining Backend listners to communicate with views
 
+  ////////////////////////////////// getPatientAppointment /////////////////////////////////////
+  var appointmentId;
+  ipc.on('getAppoitmentPatientPage', (event, arg) => {
+    appointmentId = arg['id']
+    event.returnValue = appointmentId;
+  })
 
-
-   ////////////////////////////////// getPatientAppointment /////////////////////////////////////
-   var appointmentId;
-
-   ipc.on('getAppoitmentPatientPage', (event,arg) =>{
-     appointmentId = arg['id']
-     event.returnValue = appointmentId;
-
-   })
-  
-   ipc.on('getPatientAppointment1', (event,arg) =>{
-     Appointment.findOne({ where: { id: appointmentId }, raw : true,      
-       include: [{
-       model: Patient
-     }]
+  ipc.on('getPatientAppointment1', (event, arg) => {
+    Appointment.findOne({
+      where: { id: appointmentId }, raw: true,
+      include: [{
+        model: Patient
+      }]
     }).then(appointment => {
-       event.returnValue = appointment;
-     }).catch((err) => console.log(err))
-   })
+      event.returnValue = appointment;
+    }).catch((err) => console.log(err))
+  })
 
   ////////////////////////////////// getAppointmentsByDate /////////////////////////////////////
 
-  ipc.on('getAppointmentsByDate', (event, arg)=>{
+  ipc.on('getAppointmentsByDate', (event, arg) => {
     date = arg['date']
     console.log(date)
-    Appointment.findAll({where: { date: date },raw : true,
+    Appointment.findAll({
+      where: { date: date }, raw: true,
       include: [{
-      model: Patient
-    }]
-  }).then(appointments => {
+        model: Patient
+      }]
+    }).then(appointments => {
 
       event.returnValue = appointments;
     }).catch((err) => console.log(err))
   })
 
 
-  
+
   ////////////////////////////////// addAppointment /////////////////////////////////////
 
   var patientId3;
@@ -104,7 +101,7 @@ function main() {
     time = arg['time'].split(':')
     date = date.map(e => parseInt(e))
     time = time.map(e => parseInt(e))
-    datetime = new Date(date[2],date[0] - 1,date[1],time[0] - 1,time[1],0)
+    datetime = new Date(date[2], date[0] - 1, date[1], time[0] - 1, time[1], 0)
     console.log(datetime)
     Appointment.create({
       title: title,
@@ -146,7 +143,7 @@ function main() {
   var AppoitmentId2
   let updateAppoitmentWin
   ipc.on('updateAppoitmentPage', (event, arg) => {
-    console.log('updateAppoitmentPage recieved with '+arg)
+    console.log('updateAppoitmentPage recieved with ' + arg)
     AppoitmentId2 = arg['id']
     if (!updateAppoitmentWin) {
       updateAppoitmentWin = new Window({
@@ -173,12 +170,7 @@ function main() {
     }).catch((err) => console.log(err))
   })
 
-  ipc.on('getAppointmentById', (event, arg) => {
-    Appointment.findOne({ where: { id: AppoitmentId2 }, raw: true }).then(app => {
 
-      event.returnValue = app;
-    }).catch((err) => console.log(err))
-  })
 
 
   ipc.on('updatePatient', (event, arg) => {
@@ -216,17 +208,27 @@ function main() {
     })
   })
 
+
+  ////////////////////////////////// updateAppointment /////////////////////////////////////
+
+  ipc.on('getAppointmentById', (event, arg) => {
+    Appointment.findOne({ where: { id: AppoitmentId2 }, raw: true }).then(app => {
+
+      event.returnValue = app;
+    }).catch((err) => console.log(err))
+  })
+
   ipc.on('updateAppointment', (event, arg) => {
     title = arg['title']
     date = arg['date'].split('/')
     time = arg['time'].split(':')
     date = date.map(e => parseInt(e))
     time = time.map(e => parseInt(e))
-    datetime = new Date(date[2],date[0] - 1,date[1],time[0] - 1,time[1],0)
+    datetime = new Date(date[2], date[0] - 1, date[1], time[0] + 1, time[1], 0)
 
     Appointment.findOne({
       where: {
-        id: AppoitmentId2 
+        id: AppoitmentId2
       }
     }).then((appfound) => {
       if (appfound) {
@@ -251,7 +253,7 @@ function main() {
       }
     })
   })
-  
+
 
   ////////////////////////////////// getPatientAppointments /////////////////////////////////////
 
@@ -327,36 +329,36 @@ function main() {
     });
 
   })
-    ////////////////////////////////////////printAppointment//////////////////////////////////////////
-    let appointmentWin
-    ipc.on('imprimerPage', (event, arg) => {
-      appointmentId = arg['id']
-      if (!appointmentWin) {
-        appointmentWin = new Window({
+  ////////////////////////////////////////printAppointment//////////////////////////////////////////
+  let appointmentWin
+  ipc.on('imprimerPage', (event, arg) => {
+    appointmentId = arg['id']
+    if (!appointmentWin) {
+      appointmentWin = new Window({
 
-          file: path.join('views', 'appointment.html'),
-          show:false,
-          width: 500,
-          height: 600,
-          parent: mainWindow
-        })
-  
-        appointmentWin.on('close', () => {
-          appointmentWin = null
-        })
-      }
-      // for synchronization  
-      event.returnValue = appointmentId;
-    })
-
-    var delayInMilliseconds = 1000; //1 second
-
-
-    ipc.on('print-to-pdf', function (event) {
-      appointmentWin.webContents.print({printBackground: true, landscape: true}, function (error, data) {
-       if (error) appointmentWin.close()
+        file: path.join('views', 'appointment.html'),
+        show: false,
+        width: 1024,
+        height: 1447.936,
+        parent: mainWindow
       })
+
+      appointmentWin.on('close', () => {
+        appointmentWin = null
+      })
+    }
+    // for synchronization  
+    event.returnValue = appointmentId;
+  })
+
+  var delayInMilliseconds = 1000; //1 second
+
+
+  ipc.on('print-to-pdf', function (event) {
+    appointmentWin.webContents.print({ printBackground: true, landscape: true }, function (error, data) {
+      if (error) appointmentWin.close()
     })
+  })
 
 }
 
@@ -364,7 +366,6 @@ function main() {
 
 ipc.on('getPatients', getPatients)
 ipc.on('getAppointments', getAppointments)
-
 ipc.on('getAppointmentsByPatient', getAppointmentsByPatient)
 ipc.on('getCurrentDayAppointments', getCurrentDayAppointments)
 ipc.on('deleteAppointment', deleteAppointment)

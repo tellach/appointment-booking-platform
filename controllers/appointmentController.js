@@ -10,27 +10,27 @@ function getAppointments(event, arg) {
 }
 function getAppointmentsByPatient(event, arg) {
   patientId = 1
-  Appointment.findAll({ where: { patientId: patientId }, raw : true }).then(appointments => {
+  Appointment.findAll({ where: { patientId: patientId }, raw: true }).then(appointments => {
     event.returnValue = appointments;
   }).catch((err) => console.log(err))
 }
 
 function getCurrentDayAppointments(event, arg) {
-  
-  let startDate  = new Date()
-  startDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate(),00,00,0,1)
-  const endDate  = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate(),25,59,0,1)
-  console.log(startDate,endDate)
+
+  let startDate = new Date()
+  startDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 00, 00, 0, 1)
+  const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 25, 59, 0, 1)
+  console.log(startDate, endDate)
   Appointment.findAll({
     where: {
-        date: {[Op.between]: [startDate, endDate], }
-      },
-      raw : true,
-      include: [{
-        model: Patient
-      }]
+      date: { [Op.between]: [startDate, endDate], }
+    },
+    raw: true,
+    include: [{
+      model: Patient
+    }]
   }).then(appointments => {
-       event.returnValue = appointments
+    event.returnValue = appointments
   }).catch((err) => console.log(err))
 }
 
@@ -39,19 +39,19 @@ function updateAppointmentDate(event, arg) {
   const date = new Date()
   Appointment.findOne({
     where: {
-      id: appointmentId // deletes all pugs whose age is 7
+      id: appointmentId
     }
   }).then((appointmentfound) => {
     if (appointmentfound) {
       Appointment.update(
         {
-          date :date
+          date: date
         },
         {
           where: {
             id: appointmentId
           }
-        }).then(() => event.returnValue = 'update successfully' )
+        }).then(() => event.returnValue = 'update successfully')
         .catch((err) => event.returnValue = 'error')
     }
     else {
@@ -67,7 +67,7 @@ function addAppointment(event, arg) {
   var today = new Date();
 
   title = "rdv1"
-  date = new Date(today.getFullYear(),today.getMonth(),today.getDate(),10,0,0,1)
+  date = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10, 0, 0, 1)
   patientId = 10
   Patient.findOne({ where: { id: patientId } }).then((patientFound) => {
     if (patientFound) {
