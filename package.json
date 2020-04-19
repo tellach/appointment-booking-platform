@@ -1,11 +1,13 @@
 {
-  "name": "electron-quick-start",
+  "name": "medical-appointment-booking-platform",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A platform for appointment booking, designed for doctors and medical offices",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "rebuild": "electron-rebuild -f -w sqlite3"
+    "rebuild": "electron-rebuild -f -w sqlite3",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -19,6 +21,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^8.2.1",
+    "electron-builder": "^22.5.1",
     "electron-rebuild": "^1.10.1",
     "sqlite3": "^4.1.1"
   },
@@ -28,5 +31,12 @@
     "save": "^2.4.0",
     "sequelize": "^5.21.6",
     "sqlite": "^4.0.6"
-  }
+  },
+  "build": {
+    "appId": "com.appointment-booking.app",
+    "mac": {
+      "category": "com.appointment-booking.app"
+    }
+  },
+  "postinstall": "electron-builder install-app-deps"
 }
