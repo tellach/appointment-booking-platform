@@ -101,7 +101,7 @@ function main() {
     time = arg['time'].split(':')
     date = date.map(e => parseInt(e))
     time = time.map(e => parseInt(e))
-    datetime = new Date(date[2], date[0] - 1, date[1], time[0] - 1, time[1], 0)
+    datetime = new Date(date[2], date[0] - 1, date[1], time[0] + 1, time[1], 0)
     console.log(datetime)
     Appointment.create({
       title: title,
@@ -327,7 +327,7 @@ function main() {
       mainWindow.send('updatedPatients')
       addPatientWin.close()
     });
-
+    event.returnValue = "received";
   })
   ////////////////////////////////////////printAppointment//////////////////////////////////////////
   let appointmentWin
@@ -357,6 +357,17 @@ function main() {
   ipc.on('print-to-pdf', function (event) {
     appointmentWin.webContents.print({ printBackground: true, landscape: true }, function (error, data) {
       if (error) appointmentWin.close()
+    })
+  })
+
+  /////////////////////////////// Update configs ////////////////////////////////
+  ipc.on('updateConfigs', (event, arg) => {
+    data = arg
+    console.log('\n updateConfigs is recieved \n')
+    console.log(arg+'\n')
+    fs.writeFile('./config.json', JSON.stringify(data),function(){
+      mainWindow.send('updatedConfigs')
+      event.returnValue = "received";
     })
   })
 
