@@ -5,9 +5,10 @@ function getPatientAppointment(){
 
     document.getElementById('nom').innerHTML = app['patient.lastName']
     document.getElementById('prenom').innerHTML = app['patient.firstName']
-    document.getElementById('ddn').innerHTML = app['patient.dateOfBirth'].split(' ')[0]
-    document.getElementById('drdv').innerHTML = app.date.split(' ')[0] 
-    document.getElementById('hrdv').innerHTML = app.date.split(' ')[1].split(':')[0] + ':' +  app.date.split(' ')[1].split(':')[1]
+    let dateOfBirth = (parseInt(app['patient.dateOfBirth'].getMonth())+1) + '/' + app['patient.dateOfBirth'].getDate()  +'/'+ app['patient.dateOfBirth'].getFullYear()
+    document.getElementById('ddn').innerHTML = dateOfBirth
+    document.getElementById('drdv').innerHTML = (parseInt(app.date.getMonth())+1) + '/' + app.date.getDate()  +'/'+ app.date.getFullYear()
+    document.getElementById('hrdv').innerHTML = (app.date.getHours()>9?app.date.getHours()-1:'0'+(app.date.getHours()-1)) + ':' + (app.date.getMinutes()>9?app.date.getMinutes():'0'+app.date.getMinutes())
     document.getElementById('trdv').innerHTML = app.title
     
     const data = require('../config.json')
@@ -17,7 +18,7 @@ function getPatientAppointment(){
     document.getElementById('phone').innerHTML = data.medical_office_phone_number
 
     var nowDate = new Date(); 
-    var date = nowDate.getFullYear()+'/'+(nowDate.getMonth()+1)+'/'+nowDate.getDate(); 
+    var date = (nowDate.getMonth()+1)+'/'+nowDate.getDate()+'/'+nowDate.getFullYear(); 
 
     document.getElementById('today').innerHTML = date
 }

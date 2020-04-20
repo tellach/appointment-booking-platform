@@ -5,7 +5,7 @@ function loadPatients(){
     console.log(patient.id)
     document.getElementById('lastName').value = patient.lastName
     document.getElementById('firstName').value = patient.firstName
-    document.getElementById('dateOfBirth').value = patient.dateOfBirth.split(' ')[0]
+    document.getElementById('dateOfBirth').value =   (parseInt(patient.dateOfBirth.getMonth())+1) + '/' + patient.dateOfBirth.getDate()  +'/'+ patient.dateOfBirth.getFullYear()
     document.getElementById('gender').value = patient.gender
 
 }

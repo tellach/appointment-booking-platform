@@ -59,11 +59,12 @@ function main() {
 
   ipc.on('getAppointmentsByDate', (event, arg) => {
     date = arg['date']
+    console.log('\n' + date + '\n')
     date = arg['date'].split('/')
     date = date.map(e => parseInt(e))
 
-    let startDate = new Date(date[2],date[0] - 1,date[1],0,0,0)
-    var endDate = new Date(date[2],date[0] - 1,date[1],0,0,0)
+    let startDate = new Date(date[2],date[0] - 1,date[1],1,0,0)
+    var endDate = new Date(date[2],date[0] - 1,date[1],1,0,0)
     // Add a day
     endDate.setDate(startDate.getDate() + 1) 
 
@@ -114,8 +115,6 @@ function main() {
       title: title,
       date: datetime,
       patientId: patientId3
-
-
     }).then(() => {
       mainWindow.send('updatedAppointments')
       addAppointmentWin.close()

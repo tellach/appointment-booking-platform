@@ -4,7 +4,8 @@ function loadPatients(){
     const patients = ipc.sendSync('getPatients')
     let date 
     const patientsItems = patients.reduce((html,p)=>{
-        date = String(p.dateOfBirth).split(/[- :]/).splice(1,3).join(' ')
+        console.log(p.dateOfBirth)
+        date = (parseInt(p.dateOfBirth.getMonth())+1) + '/' + p.dateOfBirth.getDate()  +'/'+ p.dateOfBirth.getFullYear()
         html +=`
         <div class="card d-flex flex-row mb-3">
                     <a class="d-flex pt-3 pl-2" href="#">

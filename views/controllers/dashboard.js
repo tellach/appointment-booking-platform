@@ -2,8 +2,9 @@ const ipc = require('electron').ipcRenderer;
 
 function loadTodayAppointments(){
     const appoitments = ipc.sendSync('getCurrentDayAppointments');
-    console.log(appoitments)
+    let date
     const appoitmentsItems = appoitments.reduce((html,app)=>{
+        date = date = (parseInt(app.date.getMonth())+1) + '/' + app.date.getDate()  +'/'+ app.date.getFullYear() +' '+ (app.date.getHours()>9?app.date.getHours()-1:'0'+(app.date.getHours()-1)) + ':' + (app.date.getMinutes()>9?app.date.getMinutes():'0'+app.date.getMinutes())
         html +=`
         <div class="d-flex flex-row mb-3">
                                     <a class="d-block position-relative" href="#">
@@ -19,7 +20,7 @@ function loadTodayAppointments(){
                                                 <p class="text-muted mb-1 text-small">${app.title}</p>
                                             </div>
                                             <div class="text-primary text-small font-weight-medium d-none d-sm-block">
-                                                ${app.date.split(' ')[1].split('.')[0]}
+                                                ${date}
                                             </div>
                                         </a>
                                     </div>

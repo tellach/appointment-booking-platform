@@ -8,7 +8,7 @@ function getPatientAppointments(id){
 
     if (appoitments[0]){
         app = appoitments[0]
-        let dateOfBirth = String(app['patient.dateOfBirth']).split(/[- :]/).splice(1,3).join(' ')
+        let dateOfBirth = (parseInt(app['patient.dateOfBirth'].getMonth())+1) + '/' + app['patient.dateOfBirth'].getDate()  +'/'+ app['patient.dateOfBirth'].getFullYear()
         app['patient.lastName']+' '+app['patient.firstName']
         
         profileHtml = `
@@ -25,7 +25,7 @@ function getPatientAppointments(id){
     }
     let date 
     let appoitmentsItems = appoitments.reduce((html,app)=>{
-        date = String(app['patient.dateOfBirth']).split(/[- :]/).splice(1,5).join(' ')
+        date = (parseInt(app.date.getMonth())+1) + '/' + app.date.getDate()  +'/'+ app.date.getFullYear() +' '+ (app.date.getHours()>9?app.date.getHours()-1:'0'+(app.date.getHours()-1)) + ':' + (app.date.getMinutes()>9?app.date.getMinutes():'0'+app.date.getMinutes())
         html +=`
             <div class="card d-flex flex-row mb-3">
                 <div class="d-flex flex-grow-1 min-width-zero">
