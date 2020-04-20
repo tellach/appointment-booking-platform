@@ -1,7 +1,7 @@
 # Plateforme de prise des rendez-vous
 
 ## Pour utiliser:
-
+Avant de lancer l'executable , veuillez créer la base de données mysql 'medicalappointment' <br>
 Pour cloner et exécuter cette application, vous aurez besoin de [Git] (https://git-scm.com) et [Node.js] (https://nodejs.org/en/download/) (fourni avec [npm ] (http://npmjs.com)) installé sur votre ordinateur, ***ainsi qu'une base de données mysql lancé sur le port par défaut (3306)***. Depuis votre ligne de commande:
 
 ```bash
