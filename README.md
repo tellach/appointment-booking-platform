@@ -27,15 +27,21 @@ npm start
 ## Screenshots
 - Dashboard
 ![](./screenshots/dashboard.PNG)
+
 -Liste des patients
 ![](./screenshots/patients.PNG)
+
 -Ajouter un patient
 ![](./screenshots/add-patient.PNG)
+
 -Profile d'un patient
 ![](./screenshots/profile.PNG)
+
 -Rendez-vous imprimé
 ![](./screenshots/printed-appointment.PNG)
+
 -Rendez-vous d'un jour donnée
 ![](./screenshots/appointments.PNG)
+
 -Configurations
 ![](./screenshots/configurations.PNG)
