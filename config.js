@@ -8,10 +8,15 @@ const { Sequelize, DataTypes } = require('sequelize');
 const PatientModel = require('./models/Patient')
 const AppointmentModel = require('./models/Appointment')
 
-const db = new Sequelize({
+/*const db = new Sequelize({
     dialect: 'sqlite',
     storage: './db/mydb.sqlite'
+});*/
+const db = new Sequelize('medicalappointment', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql'
 });
+
 db
     .authenticate()
     .then(() => {
