@@ -14,7 +14,7 @@ module.exports = (db, DataTypes) => {
             type: DataTypes.DATE
         },
         gender: {
-            type: DataTypes.TIME
+            type: DataTypes.STRING
         },
     },
     {

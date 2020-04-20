@@ -3,10 +3,12 @@ const ipc = require('electron').ipcRenderer;
 function getPatientAppointments(id){
     const appoitments = ipc.sendSync('getPatientAppointments');
     
+
     profileHtml = ``
 
     if (appoitments[0]){
         app = appoitments[0]
+        let dateOfBirth = String(app['patient.dateOfBirth']).split(/[- :]/).splice(1,3).join(' ')
         app['patient.lastName']+' '+app['patient.firstName']
         
         profileHtml = `
@@ -15,14 +17,15 @@ function getPatientAppointments(id){
                 <div class="text-center">
                     <img alt="Profile" src="img/People-Patient-Male-icon.png" class="img-thumbnail border-0 rounded-circle mb-4 list-thumbnail">
                     <p class="list-item-heading mb-1">${app['patient.lastName']+' '+app['patient.firstName']}</p>
-                    <p class="mb-4 text-muted text-small">Né le ${app['patient.dateOfBirth'].split(' ')[0]}</p>
+                    <p class="mb-4 text-muted text-small">Né le ${dateOfBirth}</p>
                 </div>
             </div>
         </div>
     ` 
     }
-    
+    let date 
     let appoitmentsItems = appoitments.reduce((html,app)=>{
+        date = String(app['patient.dateOfBirth']).split(/[- :]/).splice(1,5).join(' ')
         html +=`
             <div class="card d-flex flex-row mb-3">
                 <div class="d-flex flex-grow-1 min-width-zero">
@@ -30,7 +33,7 @@ function getPatientAppointments(id){
                         <a class="list-item-heading mb-1 truncate w-20 w-xs-100" href="#">
                             ${app.title}
                         </a>
-                        <p class="mb-1 text-muted text-small w-30 w-xs-100">${app.date.split(' ')[0] + ' ' +app.date.split(' ')[1].split('.')[0]}</p>
+                        <p class="mb-1 text-muted text-small w-30 w-xs-100">${date}</p>
                         <button type="button" class="btn btn-xs btn-outline-secondary" onClick="imprimer(${app.id})" >imprimer</button>
                         <button type="button" class="btn btn-xs btn-outline-secondary" onClick="updateAppoitment(${app.id})" >Modifier</button>
                         <button type="button" class="btn btn-xs btn-outline-danger" onClick="deleteAppoitment(${app.id})" >Supprimer</button>

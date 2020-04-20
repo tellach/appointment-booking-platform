@@ -2,7 +2,9 @@ const ipc = require('electron').ipcRenderer;
 
 function loadPatients(){
     const patients = ipc.sendSync('getPatients')
+    let date 
     const patientsItems = patients.reduce((html,p)=>{
+        date = String(p.dateOfBirth).split(/[- :]/).splice(1,3).join(' ')
         html +=`
         <div class="card d-flex flex-row mb-3">
                     <a class="d-flex pt-3 pl-2" href="#">
@@ -14,7 +16,7 @@ function loadPatients(){
                                 <p class="list-item-heading truncate mb-0">${p.lastName+' '+p.firstName}</p>
                             </a>
                             <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.gender}</p>
-                            <p class="mb-1 text-muted text-small w-15 w-sm-100">${p.dateOfBirth.split(' ')[0]}</p>
+                            <p class="mb-1 text-muted text-small w-15 w-sm-100">${date}</p>
                             <button type="button" class="btn btn-xs btn-outline-primary" onClick="addAppointment(${p.id})">Ajouter un rendez-vous</button>
                             <button type="button" class="btn btn-xs btn-outline-info" onClick="getPatientAppointments(${p.id})">Voir les rendez-vous</button>
                             <button type="button" class="btn btn-xs btn-outline-secondary" onClick="updatePatient(${p.id})">Modifier</button>
